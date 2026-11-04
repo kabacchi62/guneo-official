@@ -20,7 +20,7 @@
     body {
       margin: 0;
       background: #080f2b;
-      color: #ffffff;
+      color: white;
       font-family: system-ui, sans-serif;
       text-align: center;
     }
@@ -46,7 +46,7 @@
       background: #26365a;
       border: 1px solid #536fa3;
       border-radius: 20px;
-      color: #ffffff;
+      color: white;
       font-weight: bold;
       cursor: pointer;
     }
@@ -67,10 +67,6 @@
       height: auto;
       margin: 0 auto 25px;
       filter: drop-shadow(0 0 25px #27d9ff55);
-    }
-
-    .hero h1 {
-      margin: 0;
     }
 
     .english-title {
@@ -135,6 +131,49 @@
       color: #c2cce2;
     }
 
+    /* ゲーム画面 */
+
+    .gameplay-box {
+      background: #111b3d;
+      border: 1px solid #354a7c;
+      border-radius: 24px;
+      padding: 30px 18px;
+      margin-top: 30px;
+    }
+
+    .gameplay-image {
+      display: block;
+      width: 100%;
+      max-width: 310px;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 2px solid #4865a0;
+      box-shadow: 0 0 28px #20d9ff22;
+    }
+
+    .gameplay-placeholder {
+      max-width: 310px;
+      min-height: 250px;
+      margin: auto;
+      padding: 35px 20px;
+      border: 2px dashed #4865a0;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b5c5e6;
+      line-height: 1.9;
+    }
+
+    .gameplay-caption {
+      color: #aebfe4;
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    /* ランキング */
+
     .ranking-box {
       background: linear-gradient(
         145deg,
@@ -157,7 +196,7 @@
     }
 
     .ranking-dates {
-      color: #ffffff;
+      color: white;
       font-size: clamp(16px, 4vw, 21px);
       font-weight: 800;
       line-height: 1.8;
@@ -170,6 +209,50 @@
       font-size: 18px;
       margin-top: 25px;
     }
+
+    .development-note {
+      color: #aebfe4;
+      font-size: 12px;
+      line-height: 1.9;
+      margin-top: 25px;
+    }
+
+    /* お知らせ */
+
+    .news-list {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .news-item {
+      background: #172348;
+      border: 1px solid #354a7c;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    .news-date {
+      color: #7ceaff;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .news-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 0 8px;
+    }
+
+    .news-description {
+      color: #b5c5e6;
+      font-size: 14px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* ダウンロード */
 
     .button {
       display: inline-block;
@@ -216,7 +299,6 @@
 
   <header>
     <div class="brand">#GUNEO</div>
-
     <button
       class="lang-button"
       id="langButton"
@@ -230,18 +312,14 @@
 
     <!-- メインビジュアル -->
     <div class="hero">
-
       <h1>
         <img
           class="hero-logo"
           src="./guneo-logo.png"
-          alt="#ぐねお 公式ロゴ"
-        >
+          alt="#ぐねお 公式ロゴ">
       </h1>
 
-      <div class="english-title">
-        #GUNEO
-      </div>
+      <div class="english-title">#GUNEO</div>
 
       <p
         class="tagline"
@@ -256,12 +334,10 @@
         data-en="Simple to play. Hard to master.">
         シンプルだけど、奥が深い。
       </p>
-
     </div>
 
     <!-- ゲーム紹介 -->
     <section id="about">
-
       <h2>ABOUT THE GAME</h2>
 
       <p
@@ -271,18 +347,56 @@
         タップでぐねおを操作して、
         壁を避けながらどこまでも進もう！
       </p>
+    </section>
 
+    <!-- ゲーム画面 -->
+    <section id="gameplay">
+      <h2>GAMEPLAY</h2>
+
+      <p
+        class="sub"
+        data-ja="シンプルな操作で楽しめるアクションゲーム！"
+        data-en="A simple, tap-controlled action game!">
+        シンプルな操作で楽しめるアクションゲーム！
+      </p>
+
+      <div class="gameplay-box">
+
+        <img
+          id="gameplayImage"
+          class="gameplay-image"
+          src="./game-screenshot.png"
+          alt="ぐねおのゲームプレイ画面"
+          onload="showGameplayImage()"
+          onerror="showGameplayPlaceholder()"
+          style="display:none;">
+
+        <div
+          id="gameplayPlaceholder"
+          class="gameplay-placeholder"
+          data-ja="ゲーム画面は準備中です。公開をお楽しみに！"
+          data-en="Gameplay screenshot coming soon!">
+          ゲーム画面は準備中です。
+          公開をお楽しみに！
+        </div>
+
+        <p
+          class="gameplay-caption"
+          data-ja="※画像は開発中のゲーム画面です。"
+          data-en="Screenshot from a development build.">
+          ※画像は開発中のゲーム画面です。
+        </p>
+
+      </div>
     </section>
 
     <!-- ゲームモード -->
     <section id="modes">
-
       <h2>GAME MODES</h2>
 
       <div class="cards">
 
         <div class="card">
-
           <h3>NORMAL MODE</h3>
 
           <p
@@ -292,11 +406,9 @@
             3種類の速度を自由に選択！
             自分のベスト記録を更新しよう。
           </p>
-
         </div>
 
         <div class="card">
-
           <h3>RANKING MODE</h3>
 
           <p
@@ -305,7 +417,6 @@
             世界のプレイヤーと月間ランキングで勝負！
             自己ベストを登録して上位を目指そう。
           </p>
-
         </div>
 
       </div>
@@ -313,7 +424,6 @@
 
     <!-- 月間ランキング -->
     <section id="ranking">
-
       <h2>MONTHLY RANKING</h2>
 
       <div class="ranking-box">
@@ -351,13 +461,65 @@
           最終結果は翌月1日に発表！
         </p>
 
-      </div>
+        <p
+          class="development-note"
+          data-ja="※現在開発中のため、掲載内容は変更になる場合があります。"
+          data-en="* Features and schedules are subject to change during development.">
+          ※現在開発中のため、掲載内容は変更になる場合があります。
+        </p>
 
+      </div>
+    </section>
+
+    <!-- お知らせ -->
+    <section id="news">
+      <h2>NEWS</h2>
+
+      <div class="news-list">
+
+        <article class="news-item">
+          <div class="news-date">2026.11.04</div>
+
+          <h3
+            class="news-title"
+            data-ja="公式サイトを公開しました！"
+            data-en="Official Website Launched!">
+            公式サイトを公開しました！
+          </h3>
+
+          <p
+            class="news-description"
+            data-ja="#ぐねおの公式サイトを公開しました。ゲームの開発情報や最新のお知らせをこちらでお届けします。"
+            data-en="Welcome to the official #GUNEO website! Stay tuned for development news and updates.">
+            #ぐねおの公式サイトを公開しました。
+            ゲームの開発情報や最新のお知らせをこちらでお届けします。
+          </p>
+        </article>
+
+        <article class="news-item">
+          <div class="news-date">2026.11.04</div>
+
+          <h3
+            class="news-title"
+            data-ja="Android版を開発中！"
+            data-en="Android Version in Development!">
+            Android版を開発中！
+          </h3>
+
+          <p
+            class="news-description"
+            data-ja="現在、Android版のリリースに向けて開発を進めています。配信日が決まり次第、公式サイトでお知らせします。"
+            data-en="We're developing the Android version. The release date will be announced here when confirmed.">
+            現在、Android版のリリースに向けて開発を進めています。
+            配信日が決まり次第、公式サイトでお知らせします。
+          </p>
+        </article>
+
+      </div>
     </section>
 
     <!-- ダウンロード -->
     <section id="download">
-
       <h2>DOWNLOAD</h2>
 
       <p
@@ -367,10 +529,7 @@
         Android版 開発中
       </p>
 
-      <span class="button">
-        COMING SOON
-      </span>
-
+      <span class="button">COMING SOON</span>
     </section>
 
   </main>
@@ -404,6 +563,26 @@
         currentLanguage === "ja"
           ? "ENGLISH"
           : "日本語";
+    }
+
+    function showGameplayImage() {
+      document.getElementById(
+        "gameplayImage"
+      ).style.display = "block";
+
+      document.getElementById(
+        "gameplayPlaceholder"
+      ).style.display = "none";
+    }
+
+    function showGameplayPlaceholder() {
+      document.getElementById(
+        "gameplayImage"
+      ).style.display = "none";
+
+      document.getElementById(
+        "gameplayPlaceholder"
+      ).style.display = "flex";
     }
   </script>
 
