@@ -1,172 +1,358 @@
 
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080f2b">
-  <title>#ぐねお / #GUNEO | 公式サイト</title>
-  
-
+  <meta name="description" content="#ぐねお / #GUNEO 公式サイト。タップで進むシンプルなアクションゲーム。">
+  <title>#ぐねお / #GUNEO | Official Website</title>
 
   <style>
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: system-ui, sans-serif;
-      color: #fff;
-      text-align: center;
       background: #080f2b;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      text-align: center;
     }
+
     header {
-      padding: 24px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 6%;
       background: #101a3d;
+      border-bottom: 1px solid #26365a;
     }
+
     .brand {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 900;
-      letter-spacing: 1px;
-    }
-    .hero {
-      padding: 65px 20px 55px;
-      background:
-        radial-gradient(ellipse at 50% 30%,
-          #273c83 0%, #080f2b 70%);
-    }
-    .icon {
-      display: block;
-      width: min(65vw, 260px);
-      height: auto;
-      margin: 0 auto 28px;
-      border-radius: 24%;
-      box-shadow: 0 0 50px #27d9ff55;
-    }
-    h1 {
-      font-size: clamp(36px, 9vw, 64px);
-      margin: 12px 0;
-      background: linear-gradient(
-        90deg, #22d9ff, #ff63c5, #ffe14b, #65ff55
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .english {
+      letter-spacing: 2px;
       color: #9eeaff;
-      font-weight: bold;
-      letter-spacing: 4px;
     }
+
+    .lang-button {
+      padding: 9px 15px;
+      background: #26365a;
+      border: 1px solid #536fa3;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 60px 20px 75px;
+      background: radial-gradient(
+        ellipse at 50% 30%,
+        #273c83 0%,
+        #080f2b 75%
+      );
+    }
+
+    .hero-logo {
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      margin: 0 auto 25px;
+      filter: drop-shadow(0 0 25px #27d9ff55);
+    }
+
+    .english-title {
+      color: #9eeaff;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 5px;
+      margin-bottom: 25px;
+    }
+
     .tagline {
-      font-size: 19px;
-      font-weight: bold;
-      line-height: 1.8;
+      font-size: clamp(20px, 5vw, 30px);
+      font-weight: 900;
+      line-height: 1.6;
     }
+
     .sub {
-      color: #aebfe4;
-      font-size: 14px;
+      color: #b5c5e6;
+      line-height: 1.8;
+      font-size: 15px;
     }
+
     section {
-      padding: 55px 20px;
-      max-width: 850px;
+      padding: 65px 20px;
+      max-width: 900px;
       margin: auto;
     }
-    h2 { font-size: 26px; }
+
+    h2 {
+      font-size: clamp(24px, 6vw, 32px);
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .section-text {
+      line-height: 2;
+      font-size: 17px;
+    }
+
     .cards {
       display: grid;
       grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 28px;
+        repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 35px;
     }
+
     .card {
+      padding: 32px 20px;
+      border-radius: 22px;
       background: #172348;
       border: 1px solid #354a7c;
-      border-radius: 20px;
-      padding: 28px 18px;
     }
-    .card h3 { color: #7ceaff; }
-    .card p { color: #c2cce2; }
+
+    .card h3 {
+      color: #7ceaff;
+      font-size: 22px;
+    }
+
+    .card p {
+      line-height: 1.9;
+      color: #c2cce2;
+    }
+
+    .ranking-box {
+      background: linear-gradient(
+        145deg, #182953, #111b3d
+      );
+      border: 1px solid #4865a0;
+      border-radius: 24px;
+      padding: 30px 20px;
+      margin-top: 30px;
+    }
+
+    .ranking-box h3 {
+      color: #ffe36a;
+      font-size: 23px;
+    }
+
+    .ranking-box p {
+      line-height: 2;
+    }
+
+    .schedule {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .schedule span {
+      background: #263a69;
+      padding: 10px 15px;
+      border-radius: 14px;
+      font-weight: bold;
+    }
+
     .button {
       display: inline-block;
-      padding: 16px 35px;
+      padding: 17px 40px;
       border-radius: 40px;
       background: linear-gradient(
         90deg, #19d5ff, #5dffba
       );
       color: #08132c;
       font-weight: 900;
-      text-decoration: none;
+      margin-top: 20px;
     }
+
     footer {
-      padding: 30px;
-      color: #8c9ab8;
+      padding: 35px 20px;
       border-top: 1px solid #26365a;
+      color: #8c9ab8;
       font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 45px 15px 55px; }
+      section { padding: 50px 20px; }
+      .english-title { font-size: 18px; }
+      .card { padding: 25px 18px; }
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="brand">#GUNEO</div>
+    <button class="lang-button"
+      id="langButton"
+      onclick="toggleLanguage()">
+      ENGLISH
+    </button>
   </header>
 
   <main>
+
     <div class="hero">
-      <img
-        class="icon"
-        src="./guneo-logo.png"
-        alt="#ぐねお 公式アプリアイコン"
-      >
-      <h1>#ぐねお</h1>
-      <div class="english">#GUNEO</div>
-      <p class="tagline">
+      <h1>
+        <img
+          class="hero-logo"
+          src="./guneo-logo.png"
+          alt="#ぐねお 公式ロゴ"
+        >
+      </h1>
+
+      <div class="english-title">#GUNEO</div>
+
+      <p class="tagline"
+        data-ja="タップで進め！どこまで行ける？"
+        data-en="Tap to fly! How far can you go?">
         タップで進め！どこまで行ける？
       </p>
-      <p class="sub">
-        Tap to fly. How far can you go?
+
+      <p class="sub"
+        data-ja="シンプルだけど、奥が深い。"
+        data-en="Simple to play. Hard to master.">
+        シンプルだけど、奥が深い。
       </p>
     </div>
 
-    <section>
-      <h2>GAME ABOUT</h2>
-      <p>
-        タップでぐねおを操作して、
-        壁にぶつからず進み続けよう！
-      </p>
-      <p class="sub">
-        Tap to move, avoid the walls,
-        and go as far as you can!
+    <section id="about">
+      <h2>ABOUT THE GAME</h2>
+
+      <p class="section-text"
+        data-ja="タップでぐねおを操作して、壁を避けながらどこまでも進もう！"
+        data-en="Control GUNEO with a tap, dodge the walls, and travel as far as you can!">
+        タップでぐねおを操作して、壁を避けながらどこまでも進もう！
       </p>
     </section>
 
-    <section>
+    <section id="modes">
       <h2>GAME MODES</h2>
+
       <div class="cards">
+
         <div class="card">
           <h3>NORMAL MODE</h3>
-          <p>自分の限界に挑戦！</p>
-          <p>難易度と速度を選んで遊ぼう。</p>
+
+          <p
+            data-ja="NORMAL・HARDの難易度と、3種類の速度を自由に選択！自分のベスト記録を更新しよう。"
+            data-en="Choose NORMAL or HARD and one of three speeds. Beat your personal best!">
+            NORMAL・HARDの難易度と、
+            3種類の速度を自由に選択！
+            自分のベスト記録を更新しよう。
+          </p>
         </div>
+
         <div class="card">
           <h3>RANKING MODE</h3>
-          <p>世界のプレイヤーと競おう！</p>
-          <p>月間ランキングに挑戦！</p>
+
+          <p
+            data-ja="世界のプレイヤーと月間ランキングで勝負！自己ベストを登録して上位を目指そう。"
+            data-en="Compete in monthly global rankings! Submit your personal best and climb the leaderboard.">
+            世界のプレイヤーと月間ランキングで勝負！
+            自己ベストを登録して上位を目指そう。
+          </p>
         </div>
+
       </div>
     </section>
 
-    <section>
+    <section id="ranking">
+      <h2>MONTHLY RANKING</h2>
+
+      <div class="ranking-box">
+
+        <h3
+          data-ja="毎月開催！世界ランキング"
+          data-en="Monthly Global Rankings">
+          毎月開催！世界ランキング
+        </h3>
+
+        <p
+          data-ja="1か月に最大4回、自己ベストを登録できるランキング大会！"
+          data-en="Submit your personal best up to four times each month!">
+          1か月に最大4回、
+          自己ベストを登録できるランキング大会！
+        </p>
+
+        <p
+          data-ja="途中経過の発表日"
+          data-en="Ranking Update Dates">
+          途中経過の発表日
+        </p>
+
+        <div class="schedule">
+          <span>5</span>
+          <span>10</span>
+          <span>15</span>
+          <span>20</span>
+          <span>25</span>
+        </div>
+
+        <p
+          data-ja="最終結果は翌月1日に発表！"
+          data-en="Final results announced on the 1st of the following month!">
+          最終結果は翌月1日に発表！
+        </p>
+
+      </div>
+    </section>
+
+    <section id="download">
       <h2>DOWNLOAD</h2>
-      <p class="sub">
+
+      <p class="sub"
+        data-ja="Android版 開発中"
+        data-en="Android version in development">
         Android版 開発中
       </p>
+
       <span class="button">COMING SOON</span>
     </section>
+
   </main>
 
   <footer>
     © 2026 #GUNEO. All rights reserved.
   </footer>
+
+  <script>
+    let currentLanguage = "ja";
+
+    function toggleLanguage() {
+      currentLanguage =
+        currentLanguage === "ja" ? "en" : "ja";
+
+      document.documentElement.lang = currentLanguage;
+
+      document.querySelectorAll(
+        "[data-ja][data-en]"
+      ).forEach(element => {
+        element.textContent =
+          element.getAttribute(
+            "data-" + currentLanguage
+          );
+      });
+
+      document.getElementById(
+        "langButton"
+      ).textContent =
+        currentLanguage === "ja"
+          ? "ENGLISH"
+          : "日本語";
+    }
+  </script>
+
 </body>
 </html>
