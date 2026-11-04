@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,14 +9,18 @@
   <title>#ぐねお / #GUNEO | Official Website</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
       background: #080f2b;
-      color: #fff;
+      color: #ffffff;
       font-family: system-ui, sans-serif;
       text-align: center;
     }
@@ -43,7 +46,7 @@
       background: #26365a;
       border: 1px solid #536fa3;
       border-radius: 20px;
-      color: #fff;
+      color: #ffffff;
       font-weight: bold;
       cursor: pointer;
     }
@@ -64,6 +67,10 @@
       height: auto;
       margin: 0 auto 25px;
       filter: drop-shadow(0 0 25px #27d9ff55);
+    }
+
+    .hero h1 {
+      margin: 0;
     }
 
     .english-title {
@@ -130,7 +137,9 @@
 
     .ranking-box {
       background: linear-gradient(
-        145deg, #182953, #111b3d
+        145deg,
+        #182953,
+        #111b3d
       );
       border: 1px solid #4865a0;
       border-radius: 24px;
@@ -147,19 +156,19 @@
       line-height: 2;
     }
 
-    .schedule {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 25px 0;
+    .ranking-dates {
+      color: #ffffff;
+      font-size: clamp(16px, 4vw, 21px);
+      font-weight: 800;
+      line-height: 1.8;
+      margin: 22px auto;
     }
 
-    .schedule span {
-      background: #263a69;
-      padding: 10px 15px;
-      border-radius: 14px;
-      font-weight: bold;
+    .final-result {
+      color: #ffe36a;
+      font-weight: 900;
+      font-size: 18px;
+      margin-top: 25px;
     }
 
     .button {
@@ -167,7 +176,9 @@
       padding: 17px 40px;
       border-radius: 40px;
       background: linear-gradient(
-        90deg, #19d5ff, #5dffba
+        90deg,
+        #19d5ff,
+        #5dffba
       );
       color: #08132c;
       font-weight: 900;
@@ -182,10 +193,21 @@
     }
 
     @media (max-width: 600px) {
-      .hero { padding: 45px 15px 55px; }
-      section { padding: 50px 20px; }
-      .english-title { font-size: 18px; }
-      .card { padding: 25px 18px; }
+      .hero {
+        padding: 45px 15px 55px;
+      }
+
+      section {
+        padding: 50px 20px;
+      }
+
+      .english-title {
+        font-size: 18px;
+      }
+
+      .card {
+        padding: 25px 18px;
+      }
     }
   </style>
 </head>
@@ -194,8 +216,11 @@
 
   <header>
     <div class="brand">#GUNEO</div>
-    <button class="lang-button"
+
+    <button
+      class="lang-button"
       id="langButton"
+      type="button"
       onclick="toggleLanguage()">
       ENGLISH
     </button>
@@ -203,7 +228,9 @@
 
   <main>
 
+    <!-- メインビジュアル -->
     <div class="hero">
+
       <h1>
         <img
           class="hero-logo"
@@ -212,37 +239,50 @@
         >
       </h1>
 
-      <div class="english-title">#GUNEO</div>
+      <div class="english-title">
+        #GUNEO
+      </div>
 
-      <p class="tagline"
+      <p
+        class="tagline"
         data-ja="タップで進め！どこまで行ける？"
         data-en="Tap to fly! How far can you go?">
         タップで進め！どこまで行ける？
       </p>
 
-      <p class="sub"
+      <p
+        class="sub"
         data-ja="シンプルだけど、奥が深い。"
         data-en="Simple to play. Hard to master.">
         シンプルだけど、奥が深い。
       </p>
+
     </div>
 
+    <!-- ゲーム紹介 -->
     <section id="about">
+
       <h2>ABOUT THE GAME</h2>
 
-      <p class="section-text"
+      <p
+        class="section-text"
         data-ja="タップでぐねおを操作して、壁を避けながらどこまでも進もう！"
         data-en="Control GUNEO with a tap, dodge the walls, and travel as far as you can!">
-        タップでぐねおを操作して、壁を避けながらどこまでも進もう！
+        タップでぐねおを操作して、
+        壁を避けながらどこまでも進もう！
       </p>
+
     </section>
 
+    <!-- ゲームモード -->
     <section id="modes">
+
       <h2>GAME MODES</h2>
 
       <div class="cards">
 
         <div class="card">
+
           <h3>NORMAL MODE</h3>
 
           <p
@@ -252,9 +292,11 @@
             3種類の速度を自由に選択！
             自分のベスト記録を更新しよう。
           </p>
+
         </div>
 
         <div class="card">
+
           <h3>RANKING MODE</h3>
 
           <p
@@ -263,12 +305,15 @@
             世界のプレイヤーと月間ランキングで勝負！
             自己ベストを登録して上位を目指そう。
           </p>
+
         </div>
 
       </div>
     </section>
 
+    <!-- 月間ランキング -->
     <section id="ranking">
+
       <h2>MONTHLY RANKING</h2>
 
       <div class="ranking-box">
@@ -287,38 +332,45 @@
         </p>
 
         <p
-          data-ja="途中経過の発表日"
-          data-en="Ranking Update Dates">
-          途中経過の発表日
+          data-ja="ランキング途中経過発表日"
+          data-en="Interim Ranking Updates">
+          ランキング途中経過発表日
         </p>
 
-        <div class="schedule">
-          <span>5</span>
-          <span>10</span>
-          <span>15</span>
-          <span>20</span>
-          <span>25</span>
-        </div>
+        <p
+          class="ranking-dates"
+          data-ja="毎月5日、10日、15日、20日、25日"
+          data-en="5th, 10th, 15th, 20th, and 25th of every month">
+          毎月5日、10日、15日、20日、25日
+        </p>
 
         <p
+          class="final-result"
           data-ja="最終結果は翌月1日に発表！"
           data-en="Final results announced on the 1st of the following month!">
           最終結果は翌月1日に発表！
         </p>
 
       </div>
+
     </section>
 
+    <!-- ダウンロード -->
     <section id="download">
+
       <h2>DOWNLOAD</h2>
 
-      <p class="sub"
+      <p
+        class="sub"
         data-ja="Android版 開発中"
         data-en="Android version in development">
         Android版 開発中
       </p>
 
-      <span class="button">COMING SOON</span>
+      <span class="button">
+        COMING SOON
+      </span>
+
     </section>
 
   </main>
@@ -334,7 +386,8 @@
       currentLanguage =
         currentLanguage === "ja" ? "en" : "ja";
 
-      document.documentElement.lang = currentLanguage;
+      document.documentElement.lang =
+        currentLanguage;
 
       document.querySelectorAll(
         "[data-ja][data-en]"
