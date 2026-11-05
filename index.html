@@ -2,803 +2,857 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080f2b">
-  <meta name="description" content="#ぐねお / #GUNEO 公式サイト。無料WEB体験版公開中！Androidアプリ版開発中。">
-  <title>#ぐねお / #GUNEO | Official Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080f2b">
+<meta name="description" content="#ぐねお / #GUNEO 公式サイト。無料WEB体験版公開中！Androidアプリ版開発中。">
+<title>#ぐねお / #GUNEO | Official Website</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: #080f2b;
+  color: white;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 6%;
+  background: #101a3d;
+  border-bottom: 1px solid #26365a;
+}
+.brand {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #9eeaff;
+}
+.lang-button {
+  padding: 9px 15px;
+  background: #26365a;
+  border: 1px solid #536fa3;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.hero {
+  padding: 60px 20px 75px;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    #273c83 0%,
+    #080f2b 75%
+  );
+}
+.hero-logo {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto 25px;
+  filter: drop-shadow(0 0 25px #27d9ff55);
+}
+.english-title {
+  color: #9eeaff;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  margin-bottom: 25px;
+}
+.tagline {
+  font-size: clamp(20px, 5vw, 30px);
+  font-weight: 900;
+  line-height: 1.6;
+}
+.sub {
+  color: #b5c5e6;
+  line-height: 1.8;
+  font-size: 15px;
+}
+section {
+  padding: 65px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+h2 {
+  font-size: clamp(24px, 6vw, 32px);
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+.section-text {
+  line-height: 2;
+  font-size: 17px;
+}
+.cards, .guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.card, .guide-card {
+  padding: 28px 20px;
+  border-radius: 20px;
+  background: #172348;
+  border: 1px solid #354a7c;
+}
+.card h3, .guide-card h3 {
+  color: #7ceaff;
+  font-size: 20px;
+}
+.card p, .guide-card p {
+  line-height: 1.9;
+  color: #c2cce2;
+  font-size: 15px;
+}
+.guide-card { text-align: left; }
+.guide-card h3 { margin-top: 0; }
+.guide-card p { margin-bottom: 0; }
+.guide-note {
+  color: #b5c5e6;
+  font-size: 14px;
+  line-height: 1.9;
+  margin-top: 22px;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+/* WEB体験版 */
+.web-trial-panel {
+  max-width: 490px;
+  margin: 28px auto 0;
+  padding: 25px 18px;
+  background: #172348;
+  border: 1px solid #354a7c;
+  border-radius: 22px;
+}
+.trial-label {
+  color: #5dffba;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0;
+}
+.play-button {
+  display: block;
+  max-width: 360px;
+  margin: 20px auto 12px;
+  padding: 18px 20px;
+  border-radius: 40px;
+  background: linear-gradient(90deg, #19d5ff, #5dffba);
+  color: #08132c;
+  font-weight: 900;
+  font-size: 17px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px #19d5ff33;
+}
+.play-button:hover,
+.play-button:focus-visible {
+  filter: brightness(1.08);
+}
+.trial-note {
+  color: #b5c5e6;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.android-status {
+  margin: 28px auto 0;
+  padding: 0 12px;
+}
+.android-title {
+  color: #ffe36a;
+  font-size: 20px;
+  font-weight: 900;
+}
+.android-note {
+  color: #b5c5e6;
+  font-size: 14px;
+  line-height: 1.8;
+}
 
-    body {
-      margin: 0;
-      background: #080f2b;
-      color: white;
-      font-family: system-ui, sans-serif;
-      text-align: center;
-    }
+/* ゲーム画面 */
+.gameplay-box {
+  background: #111b3d;
+  border: 1px solid #354a7c;
+  border-radius: 24px;
+  padding: 30px 18px;
+  margin-top: 30px;
+}
+.gameplay-image {
+  display: block;
+  width: 100%;
+  max-width: 310px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 2px solid #4865a0;
+  box-shadow: 0 0 28px #20d9ff22;
+}
+.gameplay-placeholder {
+  max-width: 310px;
+  min-height: 250px;
+  margin: auto;
+  padding: 35px 20px;
+  border: 2px dashed #4865a0;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b5c5e6;
+  line-height: 1.9;
+}
+.gameplay-caption {
+  color: #aebfe4;
+  font-size: 13px;
+  margin-top: 20px;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 6%;
-      background: #101a3d;
-      border-bottom: 1px solid #26365a;
-    }
+/* Androidアプリ版 */
+.app-section-banner {
+  max-width: 860px;
+  margin: 35px auto 0;
+  padding: 32px 20px;
+  border: 1px solid #536fa3;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #182953, #111b3d);
+}
+.app-section-label {
+  color: #ffe36a;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.app-section-banner h2 {
+  margin: 12px 0;
+}
+.app-section-banner p {
+  color: #b5c5e6;
+  line-height: 1.8;
+}
+.app-only {
+  border-left: 2px solid #354a7c;
+  border-right: 2px solid #354a7c;
+  background: #0d1735;
+}
+.app-only-label {
+  display: inline-block;
+  padding: 7px 15px;
+  border-radius: 30px;
+  background: #283858;
+  color: #ffe36a;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
 
-    .brand {
-      font-size: 21px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: #9eeaff;
-    }
+/* ランキング */
+.ranking-box {
+  background: linear-gradient(145deg, #182953, #111b3d);
+  border: 1px solid #4865a0;
+  border-radius: 24px;
+  padding: 30px 20px;
+  margin-top: 30px;
+}
+.ranking-box h3 {
+  color: #ffe36a;
+  font-size: 23px;
+}
+.ranking-box p { line-height: 2; }
+.ranking-dates {
+  color: white;
+  font-size: clamp(16px, 4vw, 21px);
+  font-weight: 800;
+  line-height: 1.8;
+  margin: 22px auto;
+}
+.final-result {
+  color: #ffe36a;
+  font-weight: 900;
+  font-size: 18px;
+  margin-top: 25px;
+}
+.development-note {
+  color: #aebfe4;
+  font-size: 12px;
+  line-height: 1.9;
+  margin-top: 25px;
+}
 
-    .lang-button {
-      padding: 9px 15px;
-      background: #26365a;
-      border: 1px solid #536fa3;
-      border-radius: 20px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* FAQ */
+.faq-list {
+  max-width: 760px;
+  margin: 28px auto 0;
+  text-align: left;
+}
+.faq-item {
+  background: #172348;
+  border: 1px solid #354a7c;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.faq-item h3 {
+  color: #7ceaff;
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+.faq-item p {
+  color: #c2cce2;
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 0;
+}
 
-    .hero {
-      padding: 60px 20px 75px;
-      background: radial-gradient(
-        ellipse at 50% 30%,
-        #273c83 0%,
-        #080f2b 75%
-      );
-    }
+/* NEWS */
+.news-list {
+  margin-top: 30px;
+  text-align: left;
+}
+.news-item {
+  background: #172348;
+  border: 1px solid #354a7c;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.news-date {
+  color: #7ceaff;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.news-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+.news-description {
+  color: #b5c5e6;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0;
+}
 
-    .hero-logo {
-      display: block;
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      margin: 0 auto 25px;
-      filter: drop-shadow(0 0 25px #27d9ff55);
-    }
+/* ダウンロード */
+.button {
+  display: inline-block;
+  padding: 17px 40px;
+  border-radius: 40px;
+  background: linear-gradient(90deg, #19d5ff, #5dffba);
+  color: #08132c;
+  font-weight: 900;
+  margin-top: 20px;
+}
+footer {
+  padding: 35px 20px;
+  border-top: 1px solid #26365a;
+  color: #8c9ab8;
+  font-size: 12px;
+}
 
-    .english-title {
-      color: #9eeaff;
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 5px;
-      margin-bottom: 25px;
-    }
-
-    .tagline {
-      font-size: clamp(20px, 5vw, 30px);
-      font-weight: 900;
-      line-height: 1.6;
-    }
-
-    .sub {
-      color: #b5c5e6;
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    /* WEB体験版 */
-
-    .web-demo {
-      max-width: 470px;
-      margin: 35px auto 0;
-      padding: 28px 20px;
-      background: #172348;
-      border: 1px solid #354a7c;
-      border-radius: 24px;
-    }
-
-    .web-demo-title {
-      color: #5dffba;
-      font-size: 21px;
-      font-weight: 900;
-      margin: 0 0 20px;
-    }
-
-    .play-button {
-      display: block;
-      width: 100%;
-      padding: 18px 15px;
-      border-radius: 40px;
-      background: linear-gradient(
-        90deg,
-        #19d5ff,
-        #5dffba
-      );
-      color: #08132c;
-      font-size: 18px;
-      font-weight: 900;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .play-button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 25px #19d5ff55;
-    }
-
-    .web-demo-note {
-      color: #b5c5e6;
-      font-size: 13px;
-      margin: 17px 0 0;
-    }
-
-    .app-development {
-      margin: 32px auto 0;
-      max-width: 470px;
-    }
-
-    .app-development-title {
-      color: #ffe36a;
-      font-size: 20px;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-
-    .app-development-text {
-      color: #b5c5e6;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    section {
-      padding: 65px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h2 {
-      font-size: clamp(24px, 6vw, 32px);
-      letter-spacing: 2px;
-      margin-bottom: 25px;
-    }
-
-    .section-text {
-      line-height: 2;
-      font-size: 17px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-top: 35px;
-    }
-
-    .card {
-      padding: 32px 20px;
-      border-radius: 22px;
-      background: #172348;
-      border: 1px solid #354a7c;
-    }
-
-    .card h3 {
-      color: #7ceaff;
-      font-size: 22px;
-    }
-
-    .card p {
-      line-height: 1.9;
-      color: #c2cce2;
-    }
-
-    /* ゲーム画面 */
-
-    .gameplay-box {
-      background: #111b3d;
-      border: 1px solid #354a7c;
-      border-radius: 24px;
-      padding: 30px 18px;
-      margin-top: 30px;
-    }
-
-    .gameplay-image {
-      display: block;
-      width: 100%;
-      max-width: 310px;
-      height: auto;
-      margin: 0 auto;
-      border-radius: 18px;
-      border: 2px solid #4865a0;
-      box-shadow: 0 0 28px #20d9ff22;
-    }
-
-    .gameplay-placeholder {
-      max-width: 310px;
-      min-height: 250px;
-      margin: auto;
-      padding: 35px 20px;
-      border: 2px dashed #4865a0;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #b5c5e6;
-      line-height: 1.9;
-    }
-
-    .gameplay-caption {
-      color: #aebfe4;
-      font-size: 13px;
-      margin-top: 20px;
-    }
-
-    /* Androidアプリ版紹介 */
-
-    .app-section {
-      padding-top: 45px;
-      border-top: 1px solid #26365a;
-    }
-
-    .app-intro {
-      max-width: 800px;
-      margin: 0 auto 15px;
-      padding: 32px 20px;
-      border: 1px solid #536fa3;
-      border-radius: 24px;
-      background: linear-gradient(
-        145deg,
-        #1d305e,
-        #111b3d
-      );
-    }
-
-    .app-intro-label {
-      color: #ffe36a;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .app-intro h2 {
-      margin: 14px 0;
-    }
-
-    .app-intro p {
-      color: #b5c5e6;
-      line-height: 1.9;
-    }
-
-    .app-badge {
-      display: inline-block;
-      padding: 7px 15px;
-      border: 1px solid #766b3b;
-      border-radius: 30px;
-      background: #342f24;
-      color: #ffe36a;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    /* ランキング */
-
-    .ranking-box {
-      background: linear-gradient(
-        145deg,
-        #182953,
-        #111b3d
-      );
-      border: 1px solid #4865a0;
-      border-radius: 24px;
-      padding: 30px 20px;
-      margin-top: 30px;
-    }
-
-    .ranking-box h3 {
-      color: #ffe36a;
-      font-size: 23px;
-    }
-
-    .ranking-box p {
-      line-height: 2;
-    }
-
-    .ranking-dates {
-      color: white;
-      font-size: clamp(16px, 4vw, 21px);
-      font-weight: 800;
-      line-height: 1.8;
-      margin: 22px auto;
-    }
-
-    .final-result {
-      color: #ffe36a;
-      font-weight: 900;
-      font-size: 18px;
-      margin-top: 25px;
-    }
-
-    .development-note {
-      color: #aebfe4;
-      font-size: 12px;
-      line-height: 1.9;
-      margin-top: 25px;
-    }
-
-    /* お知らせ */
-
-    .news-list {
-      margin-top: 30px;
-      text-align: left;
-    }
-
-    .news-item {
-      background: #172348;
-      border: 1px solid #354a7c;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 14px;
-    }
-
-    .news-date {
-      color: #7ceaff;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .news-title {
-      font-size: 16px;
-      font-weight: 800;
-      margin: 0 0 8px;
-    }
-
-    .news-description {
-      color: #b5c5e6;
-      font-size: 14px;
-      line-height: 1.8;
-      margin: 0;
-    }
-
-    /* ダウンロード */
-
-    .button {
-      display: inline-block;
-      padding: 17px 40px;
-      border-radius: 40px;
-      background: linear-gradient(
-        90deg,
-        #19d5ff,
-        #5dffba
-      );
-      color: #08132c;
-      font-weight: 900;
-      margin-top: 20px;
-    }
-
-    footer {
-      padding: 35px 20px;
-      border-top: 1px solid #26365a;
-      color: #8c9ab8;
-      font-size: 12px;
-    }
-
-    @media (max-width: 600px) {
-      .hero {
-        padding: 45px 15px 55px;
-      }
-
-      section {
-        padding: 50px 20px;
-      }
-
-      .english-title {
-        font-size: 18px;
-      }
-
-      .card {
-        padding: 25px 18px;
-      }
-
-      .web-demo {
-        padding: 24px 16px;
-      }
-
-      .web-demo-title {
-        font-size: 19px;
-      }
-
-      .play-button {
-        font-size: 16px;
-      }
-    }
-  </style>
+@media (max-width: 600px) {
+  .hero { padding: 45px 15px 55px; }
+  section { padding: 50px 20px; }
+  .english-title { font-size: 18px; }
+  .card { padding: 25px 18px; }
+  .play-button { font-size: 16px; }
+}
+</style>
 </head>
 
 <body>
+<header>
+  <div class="brand">#GUNEO</div>
+  <button
+    class="lang-button"
+    id="langButton"
+    type="button"
+    onclick="toggleLanguage()">
+    ENGLISH
+  </button>
+</header>
 
-  <header>
-    <div class="brand">#GUNEO</div>
-    <button
-      class="lang-button"
-      id="langButton"
-      type="button"
-      onclick="toggleLanguage()">
-      ENGLISH
-    </button>
-  </header>
+<main>
 
-  <main>
+  <!-- トップページ -->
+  <div class="hero">
+    <h1>
+      <img
+        class="hero-logo"
+        src="./guneo-logo.png"
+        alt="#ぐねお 公式ロゴ">
+    </h1>
 
-    <!-- メインビジュアル -->
-    <div class="hero">
-      <h1>
-        <img
-          class="hero-logo"
-          src="./guneo-logo.png"
-          alt="#ぐねお 公式ロゴ">
-      </h1>
+    <div class="english-title">#GUNEO</div>
 
-      <div class="english-title">#GUNEO</div>
+    <p class="tagline"
+      data-ja="タップで進め！どこまで行ける？"
+      data-en="Tap to fly! How far can you go?">
+      タップで進め！どこまで行ける？
+    </p>
 
-      <p
-        class="tagline"
-        data-ja="タップで進め！どこまで行ける？"
-        data-en="Tap to fly! How far can you go?">
-        タップで進め！どこまで行ける？
+    <p class="sub"
+      data-ja="シンプルだけど、奥が深い。"
+      data-en="Simple to play. Hard to master.">
+      シンプルだけど、奥が深い。
+    </p>
+
+    <!-- WEB体験版 -->
+    <div class="web-trial-panel">
+      <p class="trial-label"
+        data-ja="無料WEB体験版 公開中！"
+        data-en="Free Web Demo — Play Now!">
+        無料WEB体験版 公開中！
       </p>
 
-      <p
-        class="sub"
-        data-ja="シンプルだけど、奥が深い。"
-        data-en="Simple to play. Hard to master.">
-        シンプルだけど、奥が深い。
+      <a
+        class="play-button"
+        href="https://kabacchi62.github.io/nyoronyoro-game/"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ja="今すぐ無料でプレイ！"
+        data-en="PLAY FREE NOW!">
+        今すぐ無料でプレイ！
+      </a>
+
+      <p class="trial-note"
+        data-ja="インストール不要・ブラウザですぐ遊べる"
+        data-en="No installation needed — play in your browser.">
+        インストール不要・ブラウザですぐ遊べる
       </p>
-
-      <!-- 無料WEB体験版 -->
-      <div class="web-demo">
-
-        <p
-          class="web-demo-title"
-          data-ja="無料WEB体験版 公開中！"
-          data-en="FREE WEB DEMO AVAILABLE!">
-          無料WEB体験版 公開中！
-        </p>
-
-        <a
-          class="play-button"
-          href="https://kabacchi62.github.io/nyoronyoro-game/"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-ja="今すぐ無料でプレイ！"
-          data-en="PLAY FREE NOW!">
-          今すぐ無料でプレイ！
-        </a>
-
-        <p
-          class="web-demo-note"
-          data-ja="インストール不要・ブラウザですぐ遊べる"
-          data-en="No installation needed. Play in your browser!">
-          インストール不要・ブラウザですぐ遊べる
-        </p>
-
-      </div>
-
-      <!-- Androidアプリ版 -->
-      <div class="app-development">
-
-        <p
-          class="app-development-title"
-          data-ja="Androidアプリ版 開発中！"
-          data-en="ANDROID APP IN DEVELOPMENT!">
-          Androidアプリ版 開発中！
-        </p>
-
-        <p
-          class="app-development-text"
-          data-ja="ランキング・ガチャなどの新機能を搭載予定！"
-          data-en="Ranking, gacha, and more features planned!">
-          ランキング・ガチャなどの新機能を搭載予定！
-        </p>
-
-      </div>
-
     </div>
 
-    <!-- ゲーム紹介 -->
-    <section id="about">
-      <h2>ABOUT THE GAME</h2>
-
-      <p
-        class="section-text"
-        data-ja="タップでぐねおを操作して、壁を避けながらどこまでも進もう！"
-        data-en="Control GUNEO with a tap, dodge the walls, and travel as far as you can!">
-        タップでぐねおを操作して、
-        壁を避けながらどこまでも進もう！
+    <div class="android-status">
+      <p class="android-title"
+        data-ja="Androidアプリ版 開発中！"
+        data-en="Android App In Development!">
+        Androidアプリ版 開発中！
       </p>
-    </section>
-
-    <!-- ゲーム画面 -->
-    <section id="gameplay">
-      <h2>GAMEPLAY</h2>
-
-      <p
-        class="sub"
-        data-ja="シンプルな操作で楽しめるアクションゲーム！"
-        data-en="A simple, tap-controlled action game!">
-        シンプルな操作で楽しめるアクションゲーム！
+      <p class="android-note"
+        data-ja="ランキング・ガチャなどの新機能を搭載予定！"
+        data-en="Monthly rankings, gacha and more are planned!">
+        ランキング・ガチャなどの新機能を搭載予定！
       </p>
+    </div>
+  </div>
 
-      <div class="gameplay-box">
+  <!-- ゲーム紹介 -->
+  <section id="about">
+    <h2>ABOUT THE GAME</h2>
+    <p class="section-text"
+      data-ja="タップでぐねおを操作して、壁を避けながらどこまでも進もう！"
+      data-en="Control GUNEO with a tap, dodge the walls, and travel as far as you can!">
+      タップでぐねおを操作して、壁を避けながらどこまでも進もう！
+    </p>
+  </section>
 
-        <img
-          id="gameplayImage"
-          class="gameplay-image"
-          src="./game-screenshot.png"
-          alt="ぐねおのゲームプレイ画面"
-          onload="showGameplayImage()"
-          onerror="showGameplayPlaceholder()"
-          style="display:none;">
+  <!-- WEB体験版の遊び方 -->
+  <section id="how-to-play">
+    <h2>HOW TO PLAY</h2>
 
-        <div
-          id="gameplayPlaceholder"
-          class="gameplay-placeholder"
-          data-ja="ゲーム画面は準備中です。公開をお楽しみに！"
-          data-en="Gameplay screenshot coming soon!">
-          ゲーム画面は準備中です。
-          公開をお楽しみに！
-        </div>
+    <p class="sub"
+      data-ja="WEB体験版の遊び方"
+      data-en="How to play the web demo">
+      WEB体験版の遊び方
+    </p>
 
-        <p
-          class="gameplay-caption"
-          data-ja="※画像は開発中のゲーム画面です。"
-          data-en="Screenshot from a development build.">
-          ※画像は開発中のゲーム画面です。
-        </p>
-
-      </div>
-    </section>
-
-    <!-- Androidアプリ版紹介開始 -->
-    <section class="app-section" id="app">
-
-      <div class="app-intro">
-        <div class="app-intro-label">
-          ANDROID APP VERSION
-        </div>
-
-        <h2
-          data-ja="Androidアプリ版 開発中！"
-          data-en="Android App in Development!">
-          Androidアプリ版 開発中！
-        </h2>
-
-        <p
-          data-ja="ここからはAndroidアプリ版に搭載予定の機能をご紹介します。"
-          data-en="Explore the features planned for the Android app version.">
-          ここからはAndroidアプリ版に搭載予定の機能をご紹介します。
-        </p>
-      </div>
-
-    </section>
-
-    <!-- ゲームモード（アプリ版） -->
-    <section id="modes">
-      <div class="app-badge"
-        data-ja="Androidアプリ版・開発中"
-        data-en="Android App - In Development">
-        Androidアプリ版・開発中
-      </div>
-
-      <h2>GAME MODES</h2>
-
-      <div class="cards">
-
-        <div class="card">
-          <h3>NORMAL MODE</h3>
-
-          <p
-            data-ja="NORMAL・HARDの難易度と、3種類の速度を自由に選択！自分のベスト記録を更新しよう。"
-            data-en="Choose NORMAL or HARD and one of three speeds. Beat your personal best!">
-            NORMAL・HARDの難易度と、
-            3種類の速度を自由に選択！
-            自分のベスト記録を更新しよう。
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>RANKING MODE</h3>
-
-          <p
-            data-ja="世界のプレイヤーと月間ランキングで勝負！自己ベストを登録して上位を目指そう。"
-            data-en="Compete in monthly global rankings! Submit your personal best and climb the leaderboard.">
-            世界のプレイヤーと月間ランキングで勝負！
-            自己ベストを登録して上位を目指そう。
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 月間ランキング（アプリ版） -->
-    <section id="ranking">
-      <div class="app-badge"
-        data-ja="Androidアプリ版・開発中"
-        data-en="Android App - In Development">
-        Androidアプリ版・開発中
-      </div>
-
-      <h2>MONTHLY RANKING</h2>
-
-      <div class="ranking-box">
-
+    <div class="guide-grid">
+      <div class="guide-card">
         <h3
-          data-ja="毎月開催！世界ランキング"
-          data-en="Monthly Global Rankings">
-          毎月開催！世界ランキング
+          data-ja="1. モードを選ぶ"
+          data-en="1. Choose your mode">
+          1. モードを選ぶ
         </h3>
-
         <p
-          data-ja="1か月に最大4回、自己ベストを登録できるランキング大会！"
-          data-en="Submit your personal best up to four times each month!">
-          1か月に最大4回、
-          自己ベストを登録できるランキング大会！
+          data-ja="EASY・HARDの2つから選ぼう！HARDでは速度も選択できるよ。"
+          data-en="Choose EASY or HARD. In HARD mode, you can also select your speed.">
+          EASY・HARDの2つから選ぼう！
+          HARDでは速度も選択できるよ。
         </p>
-
-        <p
-          data-ja="ランキング途中経過発表日"
-          data-en="Interim Ranking Updates">
-          ランキング途中経過発表日
-        </p>
-
-        <p
-          class="ranking-dates"
-          data-ja="毎月5日、10日、15日、20日、25日"
-          data-en="5th, 10th, 15th, 20th, and 25th of every month">
-          毎月5日、10日、15日、20日、25日
-        </p>
-
-        <p
-          class="final-result"
-          data-ja="最終結果は翌月1日に発表！"
-          data-en="Final results announced on the 1st of the following month!">
-          最終結果は翌月1日に発表！
-        </p>
-
-        <p
-          class="development-note"
-          data-ja="※現在開発中のため、掲載内容は変更になる場合があります。"
-          data-en="* Features and schedules are subject to change during development.">
-          ※現在開発中のため、掲載内容は変更になる場合があります。
-        </p>
-
-      </div>
-    </section>
-
-    <!-- お知らせ（公式サイト共通） -->
-    <section id="news">
-      <h2>NEWS</h2>
-
-      <div class="news-list">
-
-        <article class="news-item">
-          <div class="news-date">2026.11.04</div>
-
-          <h3
-            class="news-title"
-            data-ja="公式サイトを公開しました！"
-            data-en="Official Website Launched!">
-            公式サイトを公開しました！
-          </h3>
-
-          <p
-            class="news-description"
-            data-ja="#ぐねおの公式サイトを公開しました。ゲームの開発情報や最新のお知らせをこちらでお届けします。"
-            data-en="Welcome to the official #GUNEO website! Stay tuned for development news and updates.">
-            #ぐねおの公式サイトを公開しました。
-            ゲームの開発情報や最新のお知らせをこちらでお届けします。
-          </p>
-        </article>
-
-        <article class="news-item">
-          <div class="news-date">2026.11.04</div>
-
-          <h3
-            class="news-title"
-            data-ja="Android版を開発中！"
-            data-en="Android Version in Development!">
-            Android版を開発中！
-          </h3>
-
-          <p
-            class="news-description"
-            data-ja="現在、Android版のリリースに向けて開発を進めています。配信日が決まり次第、公式サイトでお知らせします。"
-            data-en="We're developing the Android version. The release date will be announced here when confirmed.">
-            現在、Android版のリリースに向けて開発を進めています。
-            配信日が決まり次第、公式サイトでお知らせします。
-          </p>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ダウンロード（アプリ版） -->
-    <section id="download">
-      <div class="app-badge"
-        data-ja="Androidアプリ版・開発中"
-        data-en="Android App - In Development">
-        Androidアプリ版・開発中
       </div>
 
-      <h2>DOWNLOAD</h2>
+      <div class="guide-card">
+        <h3
+          data-ja="2. タップで操作"
+          data-en="2. Tap to move">
+          2. タップで操作
+        </h3>
+        <p
+          data-ja="タップするとぐねおが上昇。離すと落下するので、タイミングを調整しよう。"
+          data-en="Tap to make GUNEO rise. Release to let it fall. Time your moves carefully.">
+          タップするとぐねおが上昇。
+          離すと落下するので、タイミングを調整しよう。
+        </p>
+      </div>
+
+      <div class="guide-card">
+        <h3
+          data-ja="3. 壁を避けて進む"
+          data-en="3. Dodge the walls">
+          3. 壁を避けて進む
+        </h3>
+        <p
+          data-ja="壁に当たらないように進み、自己ベストの距離を目指そう！"
+          data-en="Avoid the walls and try to beat your distance record!">
+          壁に当たらないように進み、
+          自己ベストの距離を目指そう！
+        </p>
+      </div>
+    </div>
+
+    <p class="guide-note"
+      data-ja="スマートフォンでもパソコンでも、ブラウザからすぐにプレイできます。"
+      data-en="Play instantly in a browser on your phone or computer.">
+      スマートフォンでもパソコンでも、
+      ブラウザからすぐにプレイできます。
+    </p>
+  </section>
+
+  <!-- ゲームの特徴 -->
+  <section id="features">
+    <h2>GAME FEATURES</h2>
+
+    <div class="guide-grid">
+      <div class="guide-card">
+        <h3
+          data-ja="シンプルな操作"
+          data-en="Simple controls">
+          シンプルな操作
+        </h3>
+        <p
+          data-ja="基本操作はタップだけ。短い時間でも気軽に挑戦できます。"
+          data-en="Just tap to play. Enjoy quick challenges anytime.">
+          基本操作はタップだけ。
+          短い時間でも気軽に挑戦できます。
+        </p>
+      </div>
+
+      <div class="guide-card">
+        <h3
+          data-ja="選べる難易度"
+          data-en="Choose your difficulty">
+          選べる難易度
+        </h3>
+        <p
+          data-ja="WEB体験版はEASY・HARDの2種類。HARDでは速度も選べます。"
+          data-en="The web demo offers EASY and HARD. You can also choose your speed in HARD mode.">
+          WEB体験版はEASY・HARDの2種類。
+          HARDでは速度も選べます。
+        </p>
+      </div>
+
+      <div class="guide-card">
+        <h3
+          data-ja="記録に挑戦"
+          data-en="Chase your record">
+          記録に挑戦
+        </h3>
+        <p
+          data-ja="どこまで進めるかはあなた次第。何度も挑戦して記録を伸ばそう。"
+          data-en="See how far you can go and keep improving your record.">
+          どこまで進めるかはあなた次第。
+          何度も挑戦して記録を伸ばそう。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ゲーム画面 -->
+  <section id="gameplay">
+    <h2>GAMEPLAY</h2>
+
+    <p class="sub"
+      data-ja="シンプルな操作で楽しめるアクションゲーム！"
+      data-en="A simple, tap-controlled action game!">
+      シンプルな操作で楽しめるアクションゲーム！
+    </p>
+
+    <div class="gameplay-box">
+      <img
+        id="gameplayImage"
+        class="gameplay-image"
+        src="./game-screenshot.png"
+        alt="ぐねおのゲームプレイ画面"
+        onload="showGameplayImage()"
+        onerror="showGameplayPlaceholder()"
+        style="display:none;">
+
+      <div
+        id="gameplayPlaceholder"
+        class="gameplay-placeholder"
+        data-ja="ゲーム画面は準備中です。公開をお楽しみに！"
+        data-en="Gameplay screenshot coming soon!">
+        ゲーム画面は準備中です。
+        公開をお楽しみに！
+      </div>
+
+      <p class="gameplay-caption"
+        data-ja="※画像は開発中のゲーム画面です。"
+        data-en="Screenshot from a development build.">
+        ※画像は開発中のゲーム画面です。
+      </p>
+    </div>
+  </section>
+
+  <!-- Androidアプリ版の紹介 -->
+  <div class="app-section-banner" id="android-app">
+    <div class="app-section-label">
+      ANDROID APP VERSION
+    </div>
+
+    <h2
+      data-ja="Androidアプリ版 開発中！"
+      data-en="Android App in Development!">
+      Androidアプリ版 開発中！
+    </h2>
+
+    <p
+      data-ja="ここからはAndroidアプリ版で予定している機能の紹介です。"
+      data-en="Explore features planned for the Android app below.">
+      ここからはAndroidアプリ版で予定している機能の紹介です。
+    </p>
+  </div>
+
+  <!-- アプリ版ゲームモード -->
+  <section id="modes" class="app-only">
+    <div class="app-only-label"
+      data-ja="Androidアプリ版・開発中"
+      data-en="Android app · In development">
+      Androidアプリ版・開発中
+    </div>
+
+    <h2>GAME MODES</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>NORMAL MODE</h3>
+        <p
+          data-ja="NORMAL・HARDの難易度と、3種類の速度を自由に選択！自分のベスト記録を更新しよう。"
+          data-en="Choose NORMAL or HARD and one of three speeds. Beat your personal best!">
+          NORMAL・HARDの難易度と、
+          3種類の速度を自由に選択！
+          自分のベスト記録を更新しよう。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>RANKING MODE</h3>
+        <p
+          data-ja="世界のプレイヤーと月間ランキングで勝負！自己ベストを登録して上位を目指そう。"
+          data-en="Compete in monthly global rankings! Submit your personal best and climb the leaderboard.">
+          世界のプレイヤーと月間ランキングで勝負！
+          自己ベストを登録して上位を目指そう。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 月間ランキング -->
+  <section id="ranking" class="app-only">
+    <div class="app-only-label"
+      data-ja="Androidアプリ版・開発中"
+      data-en="Android app · In development">
+      Androidアプリ版・開発中
+    </div>
+
+    <h2>MONTHLY RANKING</h2>
+
+    <div class="ranking-box">
+      <h3
+        data-ja="毎月開催！世界ランキング"
+        data-en="Monthly Global Rankings">
+        毎月開催！世界ランキング
+      </h3>
 
       <p
-        class="sub"
-        data-ja="Android版 開発中"
-        data-en="Android version in development">
-        Android版 開発中
+        data-ja="1か月に最大4回、自己ベストを登録できるランキング大会！"
+        data-en="Submit your personal best up to four times each month!">
+        1か月に最大4回、
+        自己ベストを登録できるランキング大会！
       </p>
 
-      <span class="button">COMING SOON</span>
-    </section>
+      <p
+        data-ja="ランキング途中経過発表日"
+        data-en="Interim Ranking Updates">
+        ランキング途中経過発表日
+      </p>
 
-  </main>
+      <p class="ranking-dates"
+        data-ja="毎月5日、10日、15日、20日、25日"
+        data-en="5th, 10th, 15th, 20th, and 25th of every month">
+        毎月5日、10日、15日、20日、25日
+      </p>
 
-  <footer>
-    © 2026 #GUNEO. All rights reserved.
-  </footer>
+      <p class="final-result"
+        data-ja="最終結果は翌月1日に発表！"
+        data-en="Final results announced on the 1st of the following month!">
+        最終結果は翌月1日に発表！
+      </p>
 
-  <script>
-    let currentLanguage = "ja";
+      <p class="development-note"
+        data-ja="※現在開発中のため、掲載内容は変更になる場合があります。"
+        data-en="* Features and schedules are subject to change during development.">
+        ※現在開発中のため、掲載内容は変更になる場合があります。
+      </p>
+    </div>
+  </section>
 
-    function toggleLanguage() {
-      currentLanguage =
-        currentLanguage === "ja" ? "en" : "ja";
+  <!-- よくある質問 -->
+  <section id="faq">
+    <h2>FAQ</h2>
 
-      document.documentElement.lang =
-        currentLanguage;
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3
+          data-ja="Q. WEB体験版は無料ですか？"
+          data-en="Q. Is the web demo free?">
+          Q. WEB体験版は無料ですか？
+        </h3>
+        <p
+          data-ja="はい。無料で遊べます。インストールも必要ありません。"
+          data-en="Yes. It's free to play, with no installation required.">
+          はい。無料で遊べます。
+          インストールも必要ありません。
+        </p>
+      </div>
 
-      document.querySelectorAll(
-        "[data-ja][data-en]"
-      ).forEach(element => {
-        element.textContent =
-          element.getAttribute(
-            "data-" + currentLanguage
-          );
-      });
+      <div class="faq-item">
+        <h3
+          data-ja="Q. スマートフォンでも遊べますか？"
+          data-en="Q. Can I play on my phone?">
+          Q. スマートフォンでも遊べますか？
+        </h3>
+        <p
+          data-ja="WEB体験版はスマートフォンのブラウザからアクセスできます。端末やブラウザによって動作が異なる場合があります。"
+          data-en="You can open the web demo in a mobile browser. Performance may vary by device and browser.">
+          WEB体験版はスマートフォンのブラウザからアクセスできます。
+          端末やブラウザによって動作が異なる場合があります。
+        </p>
+      </div>
 
-      document.getElementById(
-        "langButton"
-      ).textContent =
-        currentLanguage === "ja"
-          ? "ENGLISH"
-          : "日本語";
-    }
+      <div class="faq-item">
+        <h3
+          data-ja="Q. WEB版とアプリ版は何が違いますか？"
+          data-en="Q. What's different in the app?">
+          Q. WEB版とアプリ版は何が違いますか？
+        </h3>
+        <p
+          data-ja="WEB版は無料体験版です。Androidアプリ版では月間ランキングやガチャなどの機能を予定しています。"
+          data-en="The web version is a free demo. Monthly rankings, gacha, and more are planned for the Android app.">
+          WEB版は無料体験版です。
+          Androidアプリ版では月間ランキングやガチャなどの機能を予定しています。
+        </p>
+      </div>
 
-    function showGameplayImage() {
-      document.getElementById(
-        "gameplayImage"
-      ).style.display = "block";
+      <div class="faq-item">
+        <h3
+          data-ja="Q. Androidアプリ版はいつ公開されますか？"
+          data-en="Q. When will the Android app launch?">
+          Q. Androidアプリ版はいつ公開されますか？
+        </h3>
+        <p
+          data-ja="現在開発中です。公開日が決まり次第、この公式サイトのNEWSでお知らせします。"
+          data-en="It's currently in development. The release date will be announced in NEWS on this site.">
+          現在開発中です。
+          公開日が決まり次第、この公式サイトのNEWSでお知らせします。
+        </p>
+      </div>
+    </div>
+  </section>
 
-      document.getElementById(
-        "gameplayPlaceholder"
-      ).style.display = "none";
-    }
+  <!-- お知らせ -->
+  <section id="news">
+    <h2>NEWS</h2>
 
-    function showGameplayPlaceholder() {
-      document.getElementById(
-        "gameplayImage"
-      ).style.display = "none";
+    <div class="news-list">
+      <article class="news-item">
+        <div class="news-date">2026.11.04</div>
+        <h3 class="news-title"
+          data-ja="公式サイトを公開しました！"
+          data-en="Official Website Launched!">
+          公式サイトを公開しました！
+        </h3>
+        <p class="news-description"
+          data-ja="#ぐねおの公式サイトを公開しました。ゲームの開発情報や最新のお知らせをこちらでお届けします。"
+          data-en="Welcome to the official #GUNEO website! Stay tuned for development news and updates.">
+          #ぐねおの公式サイトを公開しました。
+          ゲームの開発情報や最新のお知らせをこちらでお届けします。
+        </p>
+      </article>
 
-      document.getElementById(
-        "gameplayPlaceholder"
-      ).style.display = "flex";
-    }
-  </script>
+      <article class="news-item">
+        <div class="news-date">2026.11.04</div>
+        <h3 class="news-title"
+          data-ja="Android版を開発中！"
+          data-en="Android Version in Development!">
+          Android版を開発中！
+        </h3>
+        <p class="news-description"
+          data-ja="現在、Android版のリリースに向けて開発を進めています。配信日が決まり次第、公式サイトでお知らせします。"
+          data-en="We're developing the Android version. The release date will be announced here when confirmed.">
+          現在、Android版のリリースに向けて開発を進めています。
+          配信日が決まり次第、公式サイトでお知らせします。
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ダウンロード -->
+  <section id="download" class="app-only">
+    <div class="app-only-label"
+      data-ja="Androidアプリ版・開発中"
+      data-en="Android app · In development">
+      Androidアプリ版・開発中
+    </div>
+
+    <h2>DOWNLOAD</h2>
+
+    <p class="sub"
+      data-ja="Android版 開発中"
+      data-en="Android version in development">
+      Android版 開発中
+    </p>
+
+    <span class="button">COMING SOON</span>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 #GUNEO. All rights reserved.
+</footer>
+
+<script>
+let currentLanguage = "ja";
+
+function toggleLanguage() {
+  currentLanguage =
+    currentLanguage === "ja" ? "en" : "ja";
+
+  document.documentElement.lang = currentLanguage;
+
+  document.querySelectorAll(
+    "[data-ja][data-en]"
+  ).forEach(element => {
+    element.textContent =
+      element.getAttribute("data-" + currentLanguage);
+  });
+
+  document.getElementById("langButton").textContent =
+    currentLanguage === "ja" ? "ENGLISH" : "日本語";
+}
+
+function showGameplayImage() {
+  document.getElementById("gameplayImage").style.display = "block";
+  document.getElementById("gameplayPlaceholder").style.display = "none";
+}
+
+function showGameplayPlaceholder() {
+  document.getElementById("gameplayImage").style.display = "none";
+  document.getElementById("gameplayPlaceholder").style.display = "flex";
+}
+</script>
 
 </body>
 </html>
