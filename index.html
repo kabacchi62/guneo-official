@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080f2b">
-  <meta name="description" content="#ぐねお / #GUNEO 公式サイト。タップで進むシンプルなアクションゲーム。">
+  <meta name="description" content="#ぐねお / #GUNEO 公式サイト。無料WEB体験版公開中！">
   <title>#ぐねお / #GUNEO | Official Website</title>
 
   <style>
@@ -87,6 +87,70 @@
       color: #b5c5e6;
       line-height: 1.8;
       font-size: 15px;
+    }
+
+    /* WEB体験版 */
+
+    .web-demo {
+      max-width: 470px;
+      margin: 35px auto 0;
+      padding: 28px 20px;
+      background: #172348;
+      border: 1px solid #354a7c;
+      border-radius: 24px;
+    }
+
+    .web-demo-title {
+      color: #5dffba;
+      font-size: 21px;
+      font-weight: 900;
+      margin: 0 0 20px;
+    }
+
+    .play-button {
+      display: block;
+      width: 100%;
+      padding: 18px 15px;
+      border-radius: 40px;
+      background: linear-gradient(
+        90deg,
+        #19d5ff,
+        #5dffba
+      );
+      color: #08132c;
+      font-size: 18px;
+      font-weight: 900;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .play-button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px #19d5ff55;
+    }
+
+    .web-demo-note {
+      color: #b5c5e6;
+      font-size: 13px;
+      margin: 17px 0 0;
+    }
+
+    .app-development {
+      margin: 32px auto 0;
+      max-width: 470px;
+    }
+
+    .app-development-title {
+      color: #ffe36a;
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .app-development-text {
+      color: #b5c5e6;
+      font-size: 14px;
+      line-height: 1.8;
     }
 
     section {
@@ -291,6 +355,18 @@
       .card {
         padding: 25px 18px;
       }
+
+      .web-demo {
+        padding: 24px 16px;
+      }
+
+      .web-demo-title {
+        font-size: 19px;
+      }
+
+      .play-button {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -334,6 +410,55 @@
         data-en="Simple to play. Hard to master.">
         シンプルだけど、奥が深い。
       </p>
+
+      <!-- 無料WEB体験版 -->
+      <div class="web-demo">
+
+        <p
+          class="web-demo-title"
+          data-ja="無料WEB体験版 公開中！"
+          data-en="FREE WEB DEMO AVAILABLE!">
+          無料WEB体験版 公開中！
+        </p>
+
+        <a
+          class="play-button"
+          href="https://kabacchi62.github.io/nyoronyoro-game/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-ja="今すぐ無料でプレイ！"
+          data-en="PLAY FREE NOW!">
+          今すぐ無料でプレイ！
+        </a>
+
+        <p
+          class="web-demo-note"
+          data-ja="インストール不要・ブラウザですぐ遊べる"
+          data-en="No installation needed. Play in your browser!">
+          インストール不要・ブラウザですぐ遊べる
+        </p>
+
+      </div>
+
+      <!-- Androidアプリ版 -->
+      <div class="app-development">
+
+        <p
+          class="app-development-title"
+          data-ja="Androidアプリ版 開発中！"
+          data-en="ANDROID APP IN DEVELOPMENT!">
+          Androidアプリ版 開発中！
+        </p>
+
+        <p
+          class="app-development-text"
+          data-ja="ランキング・ガチャなどの新機能を搭載予定！"
+          data-en="Ranking, gacha, and more features planned!">
+          ランキング・ガチャなどの新機能を搭載予定！
+        </p>
+
+      </div>
+
     </div>
 
     <!-- ゲーム紹介 -->
