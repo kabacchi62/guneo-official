@@ -9,57 +9,6 @@
 <meta name="description" content="#ぐねお / #GUNEO 公式サイト。無料WEB体験版公開中！Androidアプリ版開発中。">
 <title>#ぐねお / #GUNEO | Official Website</title>
 
-/* SNS共有 */
-.share-panel {
-  max-width: 490px;
-  margin: 28px auto 0;
-  padding: 24px 18px;
-  background: #172348;
-  border: 1px solid #354a7c;
-  border-radius: 22px;
-}
-.share-title {
-  color: #9eeaff;
-  font-size: 18px;
-  font-weight: 900;
-  margin: 0 0 18px;
-}
-.share-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-.share-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 12px 8px;
-  border: 0;
-  border-radius: 12px;
-  color: white;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-  cursor: pointer;
-}
-.share-line { background: #06c755; }
-.share-x { background: #171717; border: 1px solid #555; }
-.share-native { background: #355ba0; }
-.share-copy { background: #334465; }
-.share-btn:hover { filter: brightness(1.12); }
-.share-btn:focus-visible {
-  outline: 3px solid #9eeaff;
-  outline-offset: 3px;
-}
-.share-status {
-  color: #5dffba;
-  font-size: 13px;
-  min-height: 20px;
-  margin: 14px 0 0;
-}
-
 <style>
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -221,6 +170,60 @@ h2 {
   color: #b5c5e6;
   font-size: 14px;
   line-height: 1.8;
+}
+
+/* SNS共有 */
+.share-panel {
+  max-width: 490px;
+  margin: 28px auto 0;
+  padding: 24px 18px;
+  background: #172348;
+  border: 1px solid #354a7c;
+  border-radius: 22px;
+}
+.share-title {
+  color: #9eeaff;
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0 0 18px;
+}
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 8px;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.share-line { background: #06c755; }
+.share-x {
+  background: #171717;
+  border: 1px solid #555;
+}
+.share-native { background: #355ba0; }
+.share-copy { background: #334465; }
+.share-btn:hover { filter: brightness(1.12); }
+.share-btn:focus-visible {
+  outline: 3px solid #9eeaff;
+  outline-offset: 3px;
+}
+.share-status {
+  color: #5dffba;
+  font-size: 13px;
+  min-height: 20px;
+  margin: 14px 0 0;
 }
 
 /* ゲーム画面 */
@@ -411,7 +414,8 @@ footer {
   .play-button { font-size: 16px; }
 }
 </style>
-  <!-- Google Analytics (GA4) -->
+
+<!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHJ4ZNK6ZB"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -481,6 +485,47 @@ footer {
         data-en="No installation needed — play in your browser.">
         インストール不要・ブラウザですぐ遊べる
       </p>
+    </div>
+
+    <!-- SNS共有：上部 -->
+    <div class="share-panel">
+      <p class="share-title"
+        data-ja="友達に #ぐねお を広めよう！"
+        data-en="Share #GUNEO with friends!">
+        友達に #ぐねお を広めよう！
+      </p>
+
+      <div class="share-grid">
+        <a class="share-btn share-line"
+           href="#"
+           onclick="shareLine(event)">
+          LINE
+        </a>
+
+        <a class="share-btn share-x"
+           href="#"
+           onclick="shareX(event)">
+          X (Twitter)
+        </a>
+
+        <button class="share-btn share-native"
+          type="button"
+          onclick="shareNative(this)"
+          data-ja="その他に共有"
+          data-en="More options">
+          その他に共有
+        </button>
+
+        <button class="share-btn share-copy"
+          type="button"
+          onclick="copyShareUrl(this)"
+          data-ja="URLをコピー"
+          data-en="Copy URL">
+          URLをコピー
+        </button>
+      </div>
+
+      <p class="share-status" aria-live="polite"></p>
     </div>
 
     <div class="android-status">
@@ -877,6 +922,51 @@ footer {
     <span class="button">COMING SOON</span>
   </section>
 
+  <!-- SNS共有：下部 -->
+  <section id="share">
+    <h2>SHARE #GUNEO</h2>
+
+    <div class="share-panel">
+      <p class="share-title"
+        data-ja="友達に #ぐねお を広めよう！"
+        data-en="Share #GUNEO with friends!">
+        友達に #ぐねお を広めよう！
+      </p>
+
+      <div class="share-grid">
+        <a class="share-btn share-line"
+           href="#"
+           onclick="shareLine(event)">
+          LINE
+        </a>
+
+        <a class="share-btn share-x"
+           href="#"
+           onclick="shareX(event)">
+          X (Twitter)
+        </a>
+
+        <button class="share-btn share-native"
+          type="button"
+          onclick="shareNative(this)"
+          data-ja="その他に共有"
+          data-en="More options">
+          その他に共有
+        </button>
+
+        <button class="share-btn share-copy"
+          type="button"
+          onclick="copyShareUrl(this)"
+          data-ja="URLをコピー"
+          data-en="Copy URL">
+          URLをコピー
+        </button>
+      </div>
+
+      <p class="share-status" aria-live="polite"></p>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -917,6 +1007,7 @@ function showGameplayPlaceholder() {
   document.getElementById("gameplayPlaceholder").style.display = "flex";
 }
 
+/* SNS共有 */
 const shareUrl = "https://guneo.net/";
 
 function shareText() {
@@ -927,7 +1018,9 @@ function shareText() {
 
 function shareLine(event) {
   event.preventDefault();
+
   const text = shareText() + "\n" + shareUrl;
+
   window.open(
     "https://social-plugins.line.me/lineit/share?url=" +
     encodeURIComponent(shareUrl) +
@@ -939,6 +1032,7 @@ function shareLine(event) {
 
 function shareX(event) {
   event.preventDefault();
+
   window.open(
     "https://twitter.com/intent/tweet?text=" +
     encodeURIComponent(shareText()) +
@@ -948,7 +1042,7 @@ function shareX(event) {
   );
 }
 
-async function shareNative() {
+async function shareNative(button) {
   if (navigator.share) {
     try {
       await navigator.share({
@@ -961,7 +1055,8 @@ async function shareNative() {
         showShareStatus(
           currentLanguage === "ja"
             ? "共有できませんでした。"
-            : "Unable to share."
+            : "Unable to share.",
+          button
         );
       }
     }
@@ -969,7 +1064,8 @@ async function shareNative() {
     showShareStatus(
       currentLanguage === "ja"
         ? "このブラウザでは共有できません。URLコピーをご利用ください。"
-        : "Sharing is unavailable. Please copy the URL."
+        : "Sharing is unavailable. Please copy the URL.",
+      button
     );
   }
 }
@@ -977,6 +1073,7 @@ async function shareNative() {
 async function copyShareUrl(button) {
   try {
     await navigator.clipboard.writeText(shareUrl);
+
     showShareStatus(
       currentLanguage === "ja"
         ? "URLをコピーしました！"
@@ -997,11 +1094,11 @@ function showShareStatus(message, button) {
   const panel = button
     ? button.closest(".share-panel")
     : document.querySelector(".share-panel");
+
   if (panel) {
     panel.querySelector(".share-status").textContent = message;
   }
 }
-
 </script>
 
 </body>
