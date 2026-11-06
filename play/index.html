@@ -1,0 +1,86 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>#ぐねお v1.3</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b1322;color:#fff;font-family:system-ui,-apple-system,'Noto Sans JP',sans-serif;touch-action:none}canvas{position:fixed;inset:0;width:100%;height:100%;display:block}#ui{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;align-items:center}#hud{width:min(100%,540px);display:flex;justify-content:space-between;align-items:flex-start;padding:20px 22px;font-weight:800;text-shadow:0 2px 8px #0009}#score{font-size:29px}#best{font-size:13px;text-align:right;line-height:1.6;color:#cbd5e1}#panel{pointer-events:auto;margin:auto 20px;background:#101b2eea;border:1px solid #53678488;border-radius:25px;box-shadow:0 18px 80px #0009;padding:28px 23px;text-align:center;width:min(410px,calc(100% - 40px));backdrop-filter:blur(14px)}h1{font-size:clamp(23px,6vw,31px);margin:3px 0 12px;line-height:1.3}p{color:#cbd5e1;font-size:14px;line-height:1.8}button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:14px 22px;font-weight:800;color:#101b2e;background:#67e8f9;min-height:49px}button:active{transform:scale(.97)}.modes{display:flex;gap:10px;margin:23px 0 20px}.modes button{flex:1;background:#26364c;color:#d5e4f5;border:2px solid transparent}.modes button.selected{border-color:#67e8f9;background:#16485b;color:white}#start{width:100%;background:#fbbf24;font-size:19px}#hint{position:absolute;bottom:20px;font-size:12px;color:#d5e4f5a8;text-align:center;padding:0 15px}#result{font-size:35px;font-weight:900;color:#fbbf24;margin:12px 0}#modeTag{color:#67e8f9;font-weight:800;font-size:13px;letter-spacing:.12em}#panel[hidden],#hint[hidden],#custom[hidden]{display:none}#customize{width:100%;margin-top:10px;background:#253a53;color:#e4f7ff}#officialSite{display:block;width:100%;margin-top:10px;padding:14px 22px;min-height:49px;border-radius:14px;background:#253a53;color:#e4f7ff;font-size:14px;font-weight:800;text-decoration:none;text-align:center}#officialSite:active{transform:scale(.97)}#officialSite:focus-visible{outline:2px solid #67e8f9;outline-offset:3px}#custom{pointer-events:auto;margin:auto 20px;background:#101b2ef5;border:1px solid #536784;border-radius:25px;padding:22px;width:min(410px,calc(100% - 40px));text-align:center;box-shadow:0 18px 80px #0009}#custom h2{margin:0 0 12px}.swatches{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0 22px}.swatch{padding:0;width:40px;height:40px;min-height:40px;border-radius:50%;border:3px solid #46566d}.swatch.active{border:3px solid white;outline:2px solid #67e8f9}#done{width:100%}#speedPick{display:none;margin:-5px 0 18px}#speedPick.visible{display:block}#speedPick .speed-label{font-size:12px;font-weight:800;letter-spacing:.13em;color:#cbd5e1;margin-bottom:9px}#speedPick .speeds{display:flex;gap:8px}#speedPick button{flex:1;padding:11px 4px;min-height:43px;background:#26364c;color:#d5e4f5;border:2px solid transparent}#speedPick button.selected{border-color:#67e8f9;background:#16485b;color:#fff}#preview{width:100%;height:110px;background:#172438;border-radius:14px}</style></head><body><canvas id="game"></canvas><div id="ui"><div id="hud"><div id="score">0 m</div><div id="best">BEST<br>0 m</div></div><div id="panel"><div id="modeTag">ONE TAP ACTION</div><h1 id="title">#ぐねお</h1><p id="desc">タップするたびにポンッと上昇！<br>壁に触れず、どこまで進める？</p><div class="modes" id="modes"><button id="easy" class="selected">EASY</button><button id="hard">HARD</button></div><div id="speedPick"><div class="speed-label">HARD SPEED</div><div class="speeds"><button type="button" data-speed="1" class="selected">1×</button><button type="button" data-speed="1.5">1.5×</button><button type="button" data-speed="2">2×</button></div></div><div id="result" hidden></div><button id="start">ゲームスタート</button><button id="customize">カラーをカスタマイズ</button><button id="shareScore" type="button" hidden>スコア画像をシェア</button><button id="saveScore" type="button" hidden>画像を保存</button><p id="shareStatus" role="status" hidden></p><a id="officialSite" href="https://kabacchi62.github.io/guneo-official/">⌂ 公式サイトに戻る</a></div><div id="custom" hidden><h2>COLOR CUSTOMIZE</h2><canvas id="preview"></canvas><p>頭の色</p><div class="swatches" id="headColors"></div><p>体の色</p><div class="swatches" id="bodyColors"></div><button id="done">決定して戻る</button></div><div id="hint">画面タップ / クリック / スペースキーでジャンプ</div></div><script>
+(()=>{'use strict';const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');const panel=document.getElementById('panel'),title=document.getElementById('title'),desc=document.getElementById('desc'),result=document.getElementById('result'),modes=document.getElementById('modes'),start=document.getElementById('start'),scoreEl=document.getElementById('score'),bestEl=document.getElementById('best'),hint=document.getElementById('hint');const custom=document.getElementById('custom'),preview=document.getElementById('preview'),pc=preview.getContext('2d'),palette=['#facc15','#63e68d','#42c9ff','#ff5964','#b58aff','#f5f7ff'];function savedColor(k,fallback){try{const c=localStorage.getItem(k);return palette.includes(c)?c:fallback}catch{return fallback}}let headColor=savedColor('guneo-head','#facc15'),bodyColor=savedColor('guneo-body','#63e68d');function saveColors(){try{localStorage.setItem('guneo-head',headColor);localStorage.setItem('guneo-body',bodyColor)}catch{}}function drawPreview(){preview.width=600;preview.height=190;pc.clearRect(0,0,600,190);pc.strokeStyle=bodyColor;pc.lineWidth=21;pc.lineCap='round';pc.beginPath();pc.moveTo(30,145);pc.bezierCurveTo(140,150,100,20,240,65);pc.bezierCurveTo(350,115,380,145,515,83);pc.stroke();pc.fillStyle=headColor;pc.beginPath();pc.arc(515,83,24,0,Math.PI*2);pc.fill()}function renderColors(){for(const [id,value,set] of [['headColors',headColor,c=>headColor=c],['bodyColors',bodyColor,c=>bodyColor=c]]){const el=document.getElementById(id);el.replaceChildren();for(const c of palette){const b=document.createElement('button');b.className='swatch'+(value===c?' active':'');b.style.background=c;b.setAttribute('aria-label',c);b.onclick=()=>{set(c);saveColors();renderColors()};el.appendChild(b)}}drawPreview()}document.getElementById('customize').onclick=()=>{panel.hidden=true;custom.hidden=false;renderColors()};document.getElementById('done').onclick=()=>{custom.hidden=true;panel.hidden=false};let W=0,H=0,dpr=1,mode='easy',state='menu',world=0,score=0,best=0,headY=0,vel=0,last=0,trail=[],samples=[],time=0,flash=0;const SPEED=175,STEP=8,HEAD_X=.27,BODY_LENGTH=360,BODY_SPACING=3;let hardSpeed=1;const speedPick=document.getElementById('speedPick');function key(){return 'nyoronyoro-best-'+mode+(mode==='hard'&&hardSpeed!==1?'-speed-'+hardSpeed:'')}function updateSpeedUI(){speedPick.classList.toggle('visible',mode==='hard');for(const b of speedPick.querySelectorAll('button'))b.classList.toggle('selected',Number(b.dataset.speed)===hardSpeed)}for(const b of speedPick.querySelectorAll('button'))b.addEventListener('click',()=>{hardSpeed=Number(b.dataset.speed);updateSpeedUI();updateBest()});function readBest(){try{return Number(localStorage.getItem(key()))||0}catch{return 0}}function writeBest(n){try{localStorage.setItem(key(),String(n))}catch{}}function updateBest(){best=readBest();bestEl.innerHTML='BEST '+mode.toUpperCase()+(mode==='hard'?' '+hardSpeed+'×':'')+'<br>'+best+' m'}function resize(){W=innerWidth;H=innerHeight;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);if(state!=='playing'){headY=H*.5;generate()}}addEventListener('resize',resize);function select(m){mode=m;document.getElementById('easy').classList.toggle('selected',m==='easy');document.getElementById('hard').classList.toggle('selected',m==='hard');updateSpeedUI();updateBest();generate()}document.getElementById('easy').onclick=()=>select('easy');document.getElementById('hard').onclick=()=>select('hard');function corridor(x){const difficulty=Math.min(world/3500,1);const gap=(mode==='easy'?Math.min(H*.43,300):Math.min(H*.37,250))*(1-.36*difficulty);const wave=H*(.13+.035*difficulty);const center=H*.52+Math.sin(x/230)*wave+Math.sin(x/101+1.2)*wave*.27;return {top:Math.max(28,center-gap/2),bottom:Math.min(H-28,center+gap/2)}}function generate(){samples=[];for(let x=0;x<=W+STEP;x+=STEP)samples.push(corridor(world+x))}function begin(){document.getElementById('shareScore').hidden=true;document.getElementById('saveScore').hidden=true;document.getElementById('shareStatus').hidden=true;state='playing';world=0;score=0;vel=0;time=0;flash=0;headY=(corridor(W*HEAD_X).top+corridor(W*HEAD_X).bottom)/2;trail=[];for(let x=0;x>=-BODY_LENGTH-18;x-=BODY_SPACING)trail.push({x,y:headY});scoreEl.textContent='0 m';updateBest();panel.hidden=true;hint.hidden=false;generate();last=performance.now()}function end(){document.getElementById('shareScore').hidden=false;document.getElementById('saveScore').hidden=false;state='over';flash=1;const n=Math.floor(score);if(n>best){best=n;writeBest(n)}updateBest();title.innerHTML='ゲームオーバー';desc.innerHTML=mode==='hard'?'頭だけでなく、体も壁に触れないように！':'連打のリズムをつかんでもう一度！';result.hidden=false;result.textContent=n+' m';modes.style.display='flex';start.textContent='もう一度挑戦';panel.hidden=false;hint.hidden=true}start.onclick=begin;function tap(){if(state!=='playing')return;vel=Math.max(vel-275,-410)}addEventListener('pointerdown',e=>{if(e.target.closest('button')||e.target.closest('#panel'))return;e.preventDefault();tap()},{passive:false});addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();if(!e.repeat)tap()}});function smoothBodyY(i){
+  // Distance-based smoothing: head reacts immediately, body bends gradually.
+  if(i<=0)return headY;
+  const p=trail[i];if(!p)return headY;
+  let sum=0,weight=0;
+  const radius=54;
+  for(let j=Math.max(0,i-30);j<=Math.min(trail.length-1,i+30);j++){
+    const d=(trail[j].x-p.x)/radius;
+    const w=Math.exp(-2*d*d);
+    sum+=trail[j].y*w;weight+=w;
+  }
+  const filtered=weight?sum/weight:p.y;
+  // A gradual transition over the neck prevents a sudden kink on tap.
+  const distance=world-p.x;
+  const neck=Math.min(1,Math.max(0,distance/58));
+  const eased=neck*neck*(3-2*neck);
+  return headY*(1-eased)+filtered*eased;
+}
+function update(dt){time+=dt;world+=SPEED*(mode==='hard'?hardSpeed:1)*dt;score=world/12;scoreEl.textContent=Math.floor(score)+' m';vel=Math.min(vel+(vel<0?350:220)*dt,260);headY+=vel*dt;generate();const hx=W*HEAD_X;// Keep body samples at fixed world-distance intervals, independent of frame rate.
+const prev=trail[0];
+if(prev){
+  // Keep one sample every BODY_SPACING world units. Never overwrite an old
+  // sample with a new head position: doing so made the body snap on clicks.
+  const lastSampleX=prev.x;
+  const lastSampleY=prev.y;
+  const distance=world-lastSampleX;
+  if(distance>=BODY_SPACING){
+    const count=Math.floor(distance/BODY_SPACING);
+    for(let k=1;k<=count;k++){
+      const x=lastSampleX+k*BODY_SPACING;
+      const t=(x-lastSampleX)/distance;
+      trail.unshift({x,y:lastSampleY+(headY-lastSampleY)*t});
+    }
+  }
+}
+while(trail.length>2&&trail[trail.length-1].x<world-BODY_LENGTH-18)trail.pop();
+const r=mode==='easy'?9:8;const c=corridor(world+hx);if(time>.65&&(headY-r<c.top||headY+r>c.bottom)){end();return}if(mode==='hard'&&time>1.5){for(let i=3;i<trail.length;i+=3){const p=trail[i],tx=hx+p.x-world;if(tx<0)continue;const wall=corridor(p.x+hx);const radius=Math.max(3,8-(world-p.x)/BODY_LENGTH*5);const sy=smoothBodyY(i);if(sy-radius<wall.top||sy+radius>wall.bottom){end();return}}}}function draw(){ctx.clearRect(0,0,W,H);const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#0c1d35');bg.addColorStop(1,'#11162c');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);ctx.save();ctx.globalAlpha=.18;ctx.fillStyle='#6ee7f9';for(let i=0;i<28;i++){const x=((i*173-world*.13)%(W+120)+(W+120))%(W+120),y=(i*97)%Math.max(1,H);ctx.fillRect(x,y,2,2)}ctx.restore();generate();ctx.beginPath();ctx.moveTo(0,0);for(let x=0;x<=W+STEP;x+=STEP)ctx.lineTo(x,corridor(world+x).top);ctx.lineTo(W,0);ctx.closePath();ctx.fillStyle='#253d50';ctx.fill();ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W+STEP;x+=STEP)ctx.lineTo(x,corridor(world+x).bottom);ctx.lineTo(W,H);ctx.closePath();ctx.fill();for(const side of ['top','bottom']){ctx.beginPath();for(let x=0;x<=W+STEP;x+=STEP){const y=corridor(world+x)[side];if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.strokeStyle=side==='top'?'#54c8bf':'#59d2c5';ctx.lineWidth=4;ctx.shadowColor='#38bdf8';ctx.shadowBlur=10;ctx.stroke();ctx.shadowBlur=0}const hx=W*HEAD_X;if(mode==='hard'&&trail.length>1){ctx.lineCap='round';ctx.lineJoin='round';for(let i=trail.length-1;i>=1;i--){const p=trail[i],q=trail[i-1],progress=Math.min(1,(world-p.x)/BODY_LENGTH);ctx.beginPath();ctx.moveTo(hx+p.x-world,smoothBodyY(i));ctx.lineTo(hx+q.x-world,smoothBodyY(i-1));ctx.strokeStyle=bodyColor;ctx.lineWidth=5+12*(1-progress);ctx.stroke()}ctx.beginPath();ctx.moveTo(hx,smoothBodyY(0));ctx.quadraticCurveTo(hx-2,(smoothBodyY(0)+headY)/2,hx,headY);ctx.strokeStyle=bodyColor;ctx.lineWidth=16;ctx.stroke()}ctx.beginPath();ctx.arc(hx,headY,mode==='easy'?9:11,0,Math.PI*2);ctx.fillStyle=headColor;ctx.shadowColor='#fbbf24';ctx.shadowBlur=19;ctx.fill();ctx.shadowBlur=0;if(flash>0){ctx.fillStyle='rgba(251,113,133,.13)';ctx.fillRect(0,0,W,H);flash*=.9}}
+const PLAY_URL='https://kabacchi62.github.io/nyoronyoro-game/';
+const shareScore=document.getElementById('shareScore');
+const saveScore=document.getElementById('saveScore');
+const shareStatus=document.getElementById('shareStatus');
+function showShareStatus(message){shareStatus.textContent=message;shareStatus.hidden=false}
+function makeScoreCanvas(){
+  const c=document.createElement('canvas');c.width=1080;c.height=1350;
+  const g=c.getContext('2d');
+  const bg=g.createLinearGradient(0,0,0,1350);bg.addColorStop(0,'#152b52');bg.addColorStop(1,'#080f2b');
+  g.fillStyle=bg;g.fillRect(0,0,1080,1350);
+  g.strokeStyle='#31547b';g.lineWidth=4;g.strokeRect(40,40,1000,1270);
+  g.textAlign='center';g.fillStyle='#67e8f9';g.font='bold 38px sans-serif';g.fillText('ONE TAP ACTION',540,135);
+  g.fillStyle='#ffffff';g.font='bold 108px sans-serif';g.fillText('#ぐねお',540,285);
+  g.fillStyle='#67e8f9';g.font='bold 38px sans-serif';g.fillText('#GUNEO SCORE CHALLENGE',540,365);
+  g.fillStyle='#cbd5e1';g.font='bold 40px sans-serif';g.fillText('YOUR SCORE',540,500);
+  const n=Math.floor(score);
+  g.fillStyle='#fbbf24';g.font='bold 155px sans-serif';g.fillText(n+' m',540,690);
+  g.fillStyle='#ffffff';g.font='bold 56px sans-serif';g.fillText(mode.toUpperCase()+(mode==='hard'?'  ×'+hardSpeed:''),540,790);
+  g.strokeStyle='#31547b';g.beginPath();g.moveTo(110,860);g.lineTo(970,860);g.stroke();
+  g.fillStyle='#ffffff';g.font='bold 47px sans-serif';g.fillText('君はこの記録を超えられる？',540,960);
+  g.fillStyle='#67e8f9';g.font='bold 44px sans-serif';g.fillText('無料で挑戦！',540,1045);
+  g.fillStyle='#ffffff';g.font='bold 27px sans-serif';g.fillText(PLAY_URL,540,1130);
+  g.fillStyle='#9eb5d2';g.font='bold 31px sans-serif';g.fillText('#ぐねお   #GUNEO',540,1220);
+  return c;
+}
+function scoreBlob(){return new Promise((resolve,reject)=>{
+  makeScoreCanvas().toBlob(b=>b?resolve(b):reject(new Error('画像を作成できませんでした')),'image/png');
+})}
+function downloadBlob(blob){
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download='guneo-score-'+Math.floor(score)+'m.png';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+shareScore.onclick=async()=>{
+  try{
+    const blob=await scoreBlob();const file=new File([blob],'guneo-score.png',{type:'image/png'});
+    const text='#ぐねお '+mode.toUpperCase()+(mode==='hard'?' ×'+hardSpeed:'')+' で '+Math.floor(score)+'m 達成！\n君はこの記録を超えられる？\n'+PLAY_URL+'\n#GUNEO';
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+      try{await navigator.share({files:[file],title:'#ぐねお スコア',text});showShareStatus('共有メニューを開きました');}
+      catch(e){if(e.name!=='AbortError')showShareStatus('共有できませんでした。「画像を保存」をお試しください');}
+    }else{
+      downloadBlob(blob);showShareStatus('画像を保存しました。SNSの投稿画面から画像を添付してください');
+    }
+  }catch(e){showShareStatus('画像の作成に失敗しました')}
+};
+saveScore.onclick=async()=>{try{downloadBlob(await scoreBlob());showShareStatus('画像を保存しました')}catch(e){showShareStatus('画像の保存に失敗しました')}};
+function frame(now){let dt=Math.min((now-last)/1000||0,.034);last=now;if(state==='playing')update(dt);draw();requestAnimationFrame(frame)}resize();updateSpeedUI();updateBest();requestAnimationFrame(frame)})();
+</script></body></html>
