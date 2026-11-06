@@ -9,6 +9,57 @@
 <meta name="description" content="#ぐねお / #GUNEO 公式サイト。無料WEB体験版公開中！Androidアプリ版開発中。">
 <title>#ぐねお / #GUNEO | Official Website</title>
 
+/* SNS共有 */
+.share-panel {
+  max-width: 490px;
+  margin: 28px auto 0;
+  padding: 24px 18px;
+  background: #172348;
+  border: 1px solid #354a7c;
+  border-radius: 22px;
+}
+.share-title {
+  color: #9eeaff;
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0 0 18px;
+}
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 8px;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.share-line { background: #06c755; }
+.share-x { background: #171717; border: 1px solid #555; }
+.share-native { background: #355ba0; }
+.share-copy { background: #334465; }
+.share-btn:hover { filter: brightness(1.12); }
+.share-btn:focus-visible {
+  outline: 3px solid #9eeaff;
+  outline-offset: 3px;
+}
+.share-status {
+  color: #5dffba;
+  font-size: 13px;
+  min-height: 20px;
+  margin: 14px 0 0;
+}
+
 <style>
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -865,6 +916,92 @@ function showGameplayPlaceholder() {
   document.getElementById("gameplayImage").style.display = "none";
   document.getElementById("gameplayPlaceholder").style.display = "flex";
 }
+
+const shareUrl = "https://guneo.net/";
+
+function shareText() {
+  return currentLanguage === "ja"
+    ? "タップで進め！どこまで行ける？\n無料ゲーム『#ぐねお』に挑戦！\n#GUNEO"
+    : "Tap to fly! How far can you go?\nPlay #GUNEO for free!";
+}
+
+function shareLine(event) {
+  event.preventDefault();
+  const text = shareText() + "\n" + shareUrl;
+  window.open(
+    "https://social-plugins.line.me/lineit/share?url=" +
+    encodeURIComponent(shareUrl) +
+    "&text=" + encodeURIComponent(text),
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+
+function shareX(event) {
+  event.preventDefault();
+  window.open(
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(shareText()) +
+    "&url=" + encodeURIComponent(shareUrl),
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+
+async function shareNative() {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "#ぐねお / #GUNEO",
+        text: shareText(),
+        url: shareUrl
+      });
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        showShareStatus(
+          currentLanguage === "ja"
+            ? "共有できませんでした。"
+            : "Unable to share."
+        );
+      }
+    }
+  } else {
+    showShareStatus(
+      currentLanguage === "ja"
+        ? "このブラウザでは共有できません。URLコピーをご利用ください。"
+        : "Sharing is unavailable. Please copy the URL."
+    );
+  }
+}
+
+async function copyShareUrl(button) {
+  try {
+    await navigator.clipboard.writeText(shareUrl);
+    showShareStatus(
+      currentLanguage === "ja"
+        ? "URLをコピーしました！"
+        : "URL copied!",
+      button
+    );
+  } catch (error) {
+    showShareStatus(
+      currentLanguage === "ja"
+        ? "コピーできませんでした。"
+        : "Unable to copy.",
+      button
+    );
+  }
+}
+
+function showShareStatus(message, button) {
+  const panel = button
+    ? button.closest(".share-panel")
+    : document.querySelector(".share-panel");
+  if (panel) {
+    panel.querySelector(".share-status").textContent = message;
+  }
+}
+
 </script>
 
 </body>
