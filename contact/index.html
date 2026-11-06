@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080f2b">
+<title>お問い合わせ | #GUNEO</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #080f2b;
+  color: #e9efff;
+  font-family: system-ui, sans-serif;
+  line-height: 1.8;
+}
+header {
+  padding: 16px 6%;
+  background: #101a3d;
+  border-bottom: 1px solid #26365a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  color: #9eeaff;
+  font-size: 22px;
+  font-weight: 900;
+  text-decoration: none;
+}
+button { cursor: pointer; }
+.lang-button {
+  padding: 8px 16px;
+  background: #26365a;
+  color: white;
+  border: 1px solid #536fa3;
+  border-radius: 20px;
+}
+main {
+  max-width: 720px;
+  margin: auto;
+  padding: 35px 20px 70px;
+}
+.back, a { color: #65d9ff; }
+.back {
+  display: inline-block;
+  margin-bottom: 25px;
+  text-decoration: none;
+}
+h1 { font-size: clamp(26px, 5vw, 36px); }
+.description {
+  color: #b5c5e6;
+  margin-bottom: 30px;
+}
+.form-box {
+  background: #111c3c;
+  border: 1px solid #354a7c;
+  border-radius: 20px;
+  padding: 28px 22px;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+input, textarea {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 22px;
+  border: 1px solid #536fa3;
+  border-radius: 10px;
+  background: #080f2b;
+  color: white;
+  font: inherit;
+}
+textarea {
+  min-height: 170px;
+  resize: vertical;
+}
+input:focus, textarea:focus {
+  outline: 2px solid #65d9ff;
+}
+.send-button {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 30px;
+  background: linear-gradient(90deg,#19d5ff,#5dffba);
+  color: #08132c;
+  font-size: 17px;
+  font-weight: 900;
+}
+.send-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+.status {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.privacy {
+  margin-top: 25px;
+  font-size: 13px;
+  color: #b5c5e6;
+  text-align: center;
+}
+footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #8c9ab8;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="/">#GUNEO</a>
+  <button class="lang-button" id="langButton"
+    type="button" onclick="toggleLanguage()">
+    ENGLISH
+  </button>
+</header>
+
+<main>
+<a class="back" href="/"
+  data-ja="← 公式サイトに戻る"
+  data-en="← Back to Official Website">
+  ← 公式サイトに戻る
+</a>
+
+<h1 data-ja="お問い合わせ"
+    data-en="Contact Us">お問い合わせ</h1>
+
+<p class="description"
+  data-ja="#ぐねおに関するご質問、不具合報告、ご意見などはこちらからお問い合わせください。"
+  data-en="Questions, bug reports, or feedback about #GUNEO? Please use the form below.">
+  #ぐねおに関するご質問、不具合報告、ご意見などはこちらからお問い合わせください。
+</p>
+
+<div class="form-box">
+<form id="contactForm">
+
+<label for="name"
+  data-ja="お名前（ニックネーム可）"
+  data-en="Name (Nickname OK)">
+  お名前（ニックネーム可）
+</label>
+<input id="name" name="name"
+  type="text" maxlength="100" required>
+
+<label for="email"
+  data-ja="メールアドレス"
+  data-en="Email Address">
+  メールアドレス
+</label>
+<input id="email" name="email"
+  type="email" maxlength="254" required>
+
+<label for="message"
+  data-ja="お問い合わせ内容"
+  data-en="Message">
+  お問い合わせ内容
+</label>
+<textarea id="message" name="message"
+  maxlength="5000" required></textarea>
+
+<input type="text" name="website"
+  tabindex="-1" autocomplete="off"
+  aria-hidden="true"
+  style="position:absolute;left:-9999px">
+
+<button class="send-button" id="sendButton"
+  type="submit"
+  data-ja="送信する"
+  data-en="Send Message">
+  送信する
+</button>
+
+</form>
+<p class="status" id="status"
+  role="status" aria-live="polite"></p>
+</div>
+
+<p class="privacy">
+<span
+  data-ja="送信前にプライバシーポリシーをご確認ください。"
+  data-en="Please review our privacy policy before submitting.">
+  送信前にプライバシーポリシーをご確認ください。
+</span>
+<a href="/privacy/"
+  data-ja="プライバシーポリシー"
+  data-en="Privacy Policy">
+  プライバシーポリシー
+</a>
+</p>
+
+<footer>© 2026 #ぐねお / #GUNEO</footer>
+</main>
+
+<script>
+let currentLanguage = "ja";
+
+function toggleLanguage() {
+  currentLanguage =
+    currentLanguage === "ja" ? "en" : "ja";
+
+  document.documentElement.lang = currentLanguage;
+
+  document.querySelectorAll("[data-ja][data-en]")
+    .forEach(element => {
+      element.textContent =
+        element.getAttribute("data-" + currentLanguage);
+    });
+
+  document.getElementById("langButton").textContent =
+    currentLanguage === "ja" ? "ENGLISH" : "日本語";
+
+  document.title = currentLanguage === "ja"
+    ? "お問い合わせ | #GUNEO"
+    : "Contact Us | #GUNEO";
+}
+
+document.getElementById("contactForm")
+  .addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const button = document.getElementById("sendButton");
+    const status = document.getElementById("status");
+
+    button.disabled = true;
+    status.style.color = "#e9efff";
+    status.textContent = currentLanguage === "ja"
+      ? "送信中です..." : "Sending...";
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: form.elements.namedItem("name").value,
+          email: form.elements.namedItem("email").value,
+          message: form.elements.namedItem("message").value,
+          website: form.elements.namedItem("website").value
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error("Send failed");
+      }
+
+      status.style.color = "#5dffba";
+      status.textContent = currentLanguage === "ja"
+        ? "お問い合わせを送信しました！"
+        : "Your message has been sent!";
+      form.reset();
+
+    } catch (error) {
+      status.style.color = "#ff9a9a";
+      status.textContent = currentLanguage === "ja"
+        ? "送信できませんでした。時間をおいて再度お試しください。"
+        : "Could not send your message. Please try again later.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
