@@ -2,199 +2,356 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080f2b">
-  <meta name="description" content="#ぐねお公式サイトのプライバシーポリシー">
-  <title>プライバシーポリシー | #ぐねお</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #080f2b;
-      color: #e9efff;
-      font-family: -apple-system, BlinkMacSystemFont,
-        "Noto Sans JP", sans-serif;
-      line-height: 1.9;
-    }
-    .container {
-      max-width: 850px;
-      margin: auto;
-      padding: 32px 20px 70px;
-    }
-    a { color: #65d9ff; }
-    .back {
-      display: inline-block;
-      margin-bottom: 30px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    h1 {
-      font-size: clamp(26px, 5vw, 38px);
-      margin-bottom: 8px;
-    }
-    h2 {
-      font-size: 20px;
-      color: #76e4ff;
-      margin-top: 40px;
-      border-bottom: 1px solid #30436d;
-      padding-bottom: 8px;
-    }
-    p, li { font-size: 15px; }
-    .lead, .note {
-      background: #111c3c;
-      border: 1px solid #293b66;
-      border-radius: 14px;
-      padding: 18px;
-    }
-    .date { color: #a9b8d7; font-size: 13px; }
-    footer {
-      margin-top: 50px;
-      padding-top: 20px;
-      border-top: 1px solid #30436d;
-      text-align: center;
-      color: #a9b8d7;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080f2b">
+<meta name="description" content="#ぐねお / #GUNEO プライバシーポリシー">
+<title>プライバシーポリシー | #GUNEO</title>
+
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #080f2b;
+  color: #e9efff;
+  font-family: system-ui, sans-serif;
+  line-height: 1.9;
+}
+header {
+  background: #101a3d;
+  border-bottom: 1px solid #26365a;
+  padding: 16px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  color: #9eeaff;
+  font-size: 21px;
+  font-weight: 900;
+  text-decoration: none;
+}
+.lang-button {
+  padding: 9px 15px;
+  background: #26365a;
+  border: 1px solid #536fa3;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.container {
+  max-width: 850px;
+  margin: auto;
+  padding: 32px 20px 70px;
+}
+a { color: #65d9ff; }
+.back {
+  display: inline-block;
+  margin-bottom: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+h1 {
+  font-size: clamp(26px, 5vw, 38px);
+  line-height: 1.5;
+}
+h2 {
+  font-size: 20px;
+  color: #76e4ff;
+  margin-top: 40px;
+  border-bottom: 1px solid #30436d;
+  padding-bottom: 8px;
+}
+p, li { font-size: 15px; }
+.lead, .note {
+  background: #111c3c;
+  border: 1px solid #293b66;
+  border-radius: 14px;
+  padding: 18px;
+}
+.date {
+  color: #a9b8d7;
+  font-size: 13px;
+}
+footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #30436d;
+  text-align: center;
+  color: #a9b8d7;
+  font-size: 13px;
+}
+</style>
 </head>
+
 <body>
+<header>
+  <a class="brand" href="/">#GUNEO</a>
+  <button
+    class="lang-button"
+    id="langButton"
+    type="button"
+    onclick="toggleLanguage()">
+    ENGLISH
+  </button>
+</header>
+
 <main class="container">
 
-  <a class="back" href="/">← 公式サイトに戻る</a>
+<a class="back" href="/"
+  data-ja="← 公式サイトに戻る"
+  data-en="← Back to Official Website">
+  ← 公式サイトに戻る
+</a>
 
-  <h1>プライバシーポリシー</h1>
-  <p class="date">制定日：2026年11月6日</p>
+<h1 data-ja="プライバシーポリシー"
+    data-en="Privacy Policy">
+  プライバシーポリシー
+</h1>
 
-  <div class="lead">
-    <p>
-      「#ぐねお / #GUNEO」（以下「本サービス」）では、
-      利用者のプライバシーを尊重し、
-      個人情報および利用情報を適切に取り扱います。
-    </p>
-    <p>
-      本ポリシーは、公式サイトおよびWEB版ゲームに
-      適用されます。
-    </p>
-  </div>
+<p class="date"
+   data-ja="制定日：2026年11月6日"
+   data-en="Effective Date: November 6, 2026">
+  制定日：2026年11月6日
+</p>
 
-  <h2>1. 取得する情報</h2>
-  <p>
-    本サービスでは、利用状況に応じて、
-    以下の情報を取り扱う場合があります。
-  </p>
-  <ul>
-    <li>ゲームのスコア、ベスト記録、設定情報</li>
-    <li>ブラウザに保存されるゲームデータ</li>
-    <li>アクセス日時、閲覧ページなどの利用情報</li>
-    <li>IPアドレス、ブラウザ、端末に関する情報</li>
-    <li>お問い合わせ時に利用者が提供する情報</li>
-  </ul>
+<div class="lead">
+<p data-ja="「#ぐねお / #GUNEO」（以下「本サービス」）では、利用者のプライバシーを尊重し、個人情報および利用情報を適切に取り扱います。"
+   data-en="The #GUNEO service respects user privacy and handles personal information and usage data appropriately.">
+  「#ぐねお / #GUNEO」（以下「本サービス」）では、
+  利用者のプライバシーを尊重し、
+  個人情報および利用情報を適切に取り扱います。
+</p>
+<p data-ja="本ポリシーは、公式サイトおよびWEB版ゲームに適用されます。"
+   data-en="This policy applies to the official website and the web version of the game.">
+  本ポリシーは、公式サイトおよびWEB版ゲームに適用されます。
+</p>
+</div>
 
-  <h2>2. ゲームデータの保存</h2>
-  <p>
-    WEB版ゲームでは、ベストスコアや設定情報などを
-    ブラウザのローカルストレージ等に保存する場合があります。
-  </p>
-  <p>
-    ブラウザのデータ削除や端末変更などによって、
-    保存された記録が失われる場合があります。
-  </p>
+<h2 data-ja="1. 取得する情報"
+    data-en="1. Information We Collect">
+  1. 取得する情報
+</h2>
+<p data-ja="本サービスでは、利用状況に応じて以下の情報を取り扱う場合があります。"
+   data-en="Depending on how the service is used, the following information may be processed.">
+  本サービスでは、利用状況に応じて以下の情報を取り扱う場合があります。
+</p>
+<ul>
+<li data-ja="ゲームのスコア、ベスト記録、設定情報"
+    data-en="Game scores, personal best records, and settings">
+  ゲームのスコア、ベスト記録、設定情報
+</li>
+<li data-ja="ブラウザに保存されるゲームデータ"
+    data-en="Game data stored in the browser">
+  ブラウザに保存されるゲームデータ
+</li>
+<li data-ja="アクセス日時、閲覧ページなどの利用情報"
+    data-en="Access times, visited pages, and usage information">
+  アクセス日時、閲覧ページなどの利用情報
+</li>
+<li data-ja="IPアドレス、ブラウザ、端末に関する情報"
+    data-en="IP address, browser, and device information">
+  IPアドレス、ブラウザ、端末に関する情報
+</li>
+<li data-ja="お問い合わせ時に利用者が提供する情報"
+    data-en="Information provided when contacting us">
+  お問い合わせ時に利用者が提供する情報
+</li>
+</ul>
 
-  <h2>3. 利用目的</h2>
-  <ul>
-    <li>ゲーム機能の提供と記録の保持</li>
-    <li>サービスの品質改善と不具合調査</li>
-    <li>アクセス状況の把握</li>
-    <li>お問い合わせへの対応</li>
-    <li>広告配信およびサービス運営</li>
-  </ul>
+<h2 data-ja="2. ゲームデータの保存"
+    data-en="2. Game Data Storage">
+  2. ゲームデータの保存
+</h2>
+<p data-ja="WEB版ゲームでは、ベストスコアや設定情報などをブラウザのローカルストレージ等に保存する場合があります。"
+   data-en="The web game may store personal best scores and settings in browser local storage or similar technologies.">
+  WEB版ゲームでは、ベストスコアや設定情報などを
+  ブラウザのローカルストレージ等に保存する場合があります。
+</p>
+<p data-ja="ブラウザのデータ削除や端末変更などによって、保存された記録が失われる場合があります。"
+   data-en="Saved records may be lost when browser data is deleted or when changing devices.">
+  ブラウザのデータ削除や端末変更などによって、
+  保存された記録が失われる場合があります。
+</p>
 
-  <h2>4. 広告配信について</h2>
-  <p>
-    本サービスでは、今後Google AdSenseなどの
-    第三者配信広告サービスを導入する場合があります。
-  </p>
-  <p>
-    広告配信事業者は、Cookie等を利用して、
-    利用者のアクセス情報に基づいた広告を
-    配信する場合があります。
-  </p>
-  <p>
-    Googleによる広告でのデータ利用については、
-    <a href="https://policies.google.com/technologies/ads"
-       target="_blank" rel="noopener noreferrer">
-      Googleの広告に関する説明
-    </a>
-    をご確認ください。
-  </p>
+<h2 data-ja="3. 利用目的"
+    data-en="3. Purposes of Use">
+  3. 利用目的
+</h2>
+<ul>
+<li data-ja="ゲーム機能の提供と記録の保持"
+    data-en="Providing game functions and saving records">
+  ゲーム機能の提供と記録の保持
+</li>
+<li data-ja="サービスの品質改善と不具合調査"
+    data-en="Improving service quality and investigating issues">
+  サービスの品質改善と不具合調査
+</li>
+<li data-ja="アクセス状況の把握"
+    data-en="Analyzing website traffic">
+  アクセス状況の把握
+</li>
+<li data-ja="お問い合わせへの対応"
+    data-en="Responding to inquiries">
+  お問い合わせへの対応
+</li>
+<li data-ja="広告配信およびサービス運営"
+    data-en="Advertising and service operation">
+  広告配信およびサービス運営
+</li>
+</ul>
 
-  <h2>5. アクセス解析について</h2>
-  <p>
-    本サービスでは、今後Googleアナリティクス等の
-    アクセス解析サービスを利用する場合があります。
-  </p>
-  <p>
-    導入した場合、Cookie等を通じて収集される情報を、
-    サイトの利用状況の分析および改善に利用します。
-  </p>
+<h2 data-ja="4. 広告配信について"
+    data-en="4. Advertising">
+  4. 広告配信について
+</h2>
+<p data-ja="本サービスでは、今後Google AdSenseなどの第三者配信広告サービスを導入する場合があります。"
+   data-en="The service may introduce third-party advertising services such as Google AdSense in the future.">
+  本サービスでは、今後Google AdSenseなどの
+  第三者配信広告サービスを導入する場合があります。
+</p>
+<p data-ja="広告配信事業者は、Cookie等を利用して、利用者のアクセス情報に基づいた広告を配信する場合があります。"
+   data-en="Advertising providers may use cookies and similar technologies to display ads based on users' visits and activity.">
+  広告配信事業者は、Cookie等を利用して、
+  利用者のアクセス情報に基づいた広告を配信する場合があります。
+</p>
+<p>
+  <span
+    data-ja="Googleによる広告でのデータ利用については、以下をご確認ください。"
+    data-en="For information about Google's use of data in advertising, please see:">
+    Googleによる広告でのデータ利用については、以下をご確認ください。
+  </span>
+  <a href="https://policies.google.com/technologies/ads"
+     target="_blank" rel="noopener noreferrer">
+    Google Advertising Policies
+  </a>
+</p>
 
-  <h2>6. Cookie等について</h2>
-  <p>
-    Cookieは、ブラウザに保存される小さなデータです。
-    利用者はブラウザの設定からCookieを制限または
-    削除できます。
-  </p>
-  <p>
-    ただし、Cookie等を無効にすると、
-    一部機能が正常に動作しない場合があります。
-  </p>
+<h2 data-ja="5. アクセス解析について"
+    data-en="5. Analytics">
+  5. アクセス解析について
+</h2>
+<p data-ja="本サービスではGoogle Analytics 4（GA4）を利用し、サイトのアクセス状況を分析しています。Google AnalyticsはCookie等を利用して利用情報を収集する場合があります。"
+   data-en="This service uses Google Analytics 4 (GA4) to analyze website traffic. Google Analytics may use cookies and similar technologies to collect usage information.">
+  本サービスではGoogle Analytics 4（GA4）を利用し、
+  サイトのアクセス状況を分析しています。
+  Google AnalyticsはCookie等を利用して
+  利用情報を収集する場合があります。
+</p>
+<p>
+  <a href="https://policies.google.com/privacy"
+     target="_blank" rel="noopener noreferrer">
+    Google Privacy Policy
+  </a>
+</p>
 
-  <h2>7. 第三者への情報提供</h2>
-  <p>
-    法令に基づく場合や、サービス提供に必要な
-    外部サービスを利用する場合などを除き、
-    取得した個人情報を本人の同意なく
-    第三者に提供しません。
-  </p>
+<h2 data-ja="6. Cookie等について"
+    data-en="6. Cookies and Similar Technologies">
+  6. Cookie等について
+</h2>
+<p data-ja="Cookieはブラウザに保存される小さなデータです。利用者はブラウザの設定からCookieを制限または削除できます。"
+   data-en="Cookies are small pieces of data stored by a browser. Users can restrict or delete cookies through their browser settings.">
+  Cookieはブラウザに保存される小さなデータです。
+  利用者はブラウザの設定からCookieを制限または削除できます。
+</p>
+<p data-ja="ただし、Cookie等を無効にすると、一部機能が正常に動作しない場合があります。"
+   data-en="Disabling cookies or similar technologies may affect certain functions.">
+  ただし、Cookie等を無効にすると、
+  一部機能が正常に動作しない場合があります。
+</p>
 
-  <h2>8. 外部サービスへのリンク</h2>
-  <p>
-    本サービスには、SNSや外部サイトへの
-    リンクが含まれる場合があります。
-    リンク先での情報の取り扱いについては、
-    各サービスのプライバシーポリシーをご確認ください。
-  </p>
+<h2 data-ja="7. 第三者への情報提供"
+    data-en="7. Sharing Information with Third Parties">
+  7. 第三者への情報提供
+</h2>
+<p data-ja="法令に基づく場合やサービス提供に必要な外部サービスを利用する場合などを除き、取得した個人情報を本人の同意なく第三者に提供しません。"
+   data-en="Personal information will not be shared with third parties without consent, except where required by law or necessary for providing the service through external providers.">
+  法令に基づく場合やサービス提供に必要な
+  外部サービスを利用する場合などを除き、
+  取得した個人情報を本人の同意なく第三者に提供しません。
+</p>
 
-  <h2>9. 未成年の利用について</h2>
-  <p>
-    未成年の利用者は、必要に応じて保護者と相談のうえ、
-    本サービスをご利用ください。
-  </p>
+<h2 data-ja="8. 外部サービスへのリンク"
+    data-en="8. External Links">
+  8. 外部サービスへのリンク
+</h2>
+<p data-ja="本サービスにはSNSや外部サイトへのリンクが含まれる場合があります。リンク先での情報の取り扱いについては各サービスのプライバシーポリシーをご確認ください。"
+   data-en="The service may contain links to social media and external websites. Please review the privacy policies of those services regarding their data practices.">
+  本サービスにはSNSや外部サイトへのリンクが
+  含まれる場合があります。
+  リンク先での情報の取り扱いについては
+  各サービスのプライバシーポリシーをご確認ください。
+</p>
 
-  <h2>10. ポリシーの変更</h2>
-  <p>
-    本ポリシーは、法令やサービス内容の変更等に応じて
-    改定する場合があります。
-    改定後の内容は本ページに掲載します。
-  </p>
+<h2 data-ja="9. 未成年の利用について"
+    data-en="9. Use by Minors">
+  9. 未成年の利用について
+</h2>
+<p data-ja="未成年の利用者は、必要に応じて保護者と相談のうえ、本サービスをご利用ください。"
+   data-en="Minors should consult a parent or guardian when appropriate before using the service.">
+  未成年の利用者は、必要に応じて保護者と相談のうえ、
+  本サービスをご利用ください。
+</p>
 
-  <h2>11. お問い合わせ</h2>
-  <div class="note">
-    <p>
-      本サービスのプライバシーに関するお問い合わせは、
-      公式サイトに掲載するお問い合わせ窓口から
-      ご連絡ください。
-    </p>
-    <p>
-      <a href="/">#ぐねお公式サイト</a>
-    </p>
-  </div>
+<h2 data-ja="10. ポリシーの変更"
+    data-en="10. Changes to This Policy">
+  10. ポリシーの変更
+</h2>
+<p data-ja="本ポリシーは法令やサービス内容の変更等に応じて改定する場合があります。改定後の内容は本ページに掲載します。"
+   data-en="This policy may be updated due to changes in laws or the service. Updated versions will be published on this page.">
+  本ポリシーは法令やサービス内容の変更等に応じて
+  改定する場合があります。
+  改定後の内容は本ページに掲載します。
+</p>
 
-  <footer>
-    © 2026 #ぐねお / #GUNEO
-  </footer>
+<h2 data-ja="11. お問い合わせ"
+    data-en="11. Contact">
+  11. お問い合わせ
+</h2>
+<div class="note">
+<p data-ja="プライバシーに関するお問い合わせは、公式サイトに掲載するお問い合わせ窓口からご連絡ください。"
+   data-en="For privacy-related inquiries, please use the contact information provided on the official website.">
+  プライバシーに関するお問い合わせは、
+  公式サイトに掲載するお問い合わせ窓口から
+  ご連絡ください。
+</p>
+<a href="/"
+   data-ja="#ぐねお公式サイト"
+   data-en="#GUNEO Official Website">
+  #ぐねお公式サイト
+</a>
+</div>
+
+<footer>
+  © 2026 #ぐねお / #GUNEO
+</footer>
 
 </main>
+
+<script>
+let currentLanguage = "ja";
+
+function toggleLanguage() {
+  currentLanguage =
+    currentLanguage === "ja" ? "en" : "ja";
+
+  document.documentElement.lang = currentLanguage;
+
+  document.querySelectorAll("[data-ja][data-en]")
+    .forEach(element => {
+      element.textContent =
+        element.getAttribute("data-" + currentLanguage);
+    });
+
+  document.getElementById("langButton").textContent =
+    currentLanguage === "ja" ? "ENGLISH" : "日本語";
+
+  document.title =
+    currentLanguage === "ja"
+      ? "プライバシーポリシー | #GUNEO"
+      : "Privacy Policy | #GUNEO";
+}
+</script>
 </body>
 </html>
