@@ -703,31 +703,28 @@ footer {
       シンプルな操作で楽しめるアクションゲーム！
     </p>
 
-    <div class="gameplay-box">
-      <img
-        id="gameplayImage"
-        class="gameplay-image"
-        src="./game-screenshot.png"
-        alt="ぐねおのゲームプレイ画面"
-        onload="showGameplayImage()"
-        onerror="showGameplayPlaceholder()"
-        style="display:none;">
+    
+<div class="gameplay-box">
+  <video
+    class="gameplay-video"
+    controls
+    playsinline
+    preload="metadata"
+    muted
+    aria-label="ぐねおのプレイ動画">
+    <source
+      src="/ScreenRecording_11-06-2026%2021-21-05_1.mov"
+      type="video/quicktime">
+    お使いのブラウザでは動画を再生できません。
+  </video>
 
-      <div
-        id="gameplayPlaceholder"
-        class="gameplay-placeholder"
-        data-ja="ゲーム画面は準備中です。公開をお楽しみに！"
-        data-en="Gameplay screenshot coming soon!">
-        ゲーム画面は準備中です。
-        公開をお楽しみに！
-      </div>
+  <p class="gameplay-caption"
+    data-ja="実際のゲームプレイ動画です。"
+    data-en="Actual gameplay footage.">
+    実際のゲームプレイ動画です。
+  </p>
+</div>
 
-      <p class="gameplay-caption"
-        data-ja="※画像は開発中のゲーム画面です。"
-        data-en="Screenshot from a development build.">
-        ※画像は開発中のゲーム画面です。
-      </p>
-    </div>
   </section>
 
   <!-- Androidアプリ版の紹介 -->
