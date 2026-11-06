@@ -6,8 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080f2b">
 <title>お問い合わせ | #GUNEO</title>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async defer></script>
+
 <style>
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: #080f2b;
@@ -107,6 +112,10 @@ input:focus, textarea:focus {
   color: #b5c5e6;
   text-align: center;
 }
+.turnstile-box {
+  margin: 0 0 24px;
+  min-height: 65px;
+}
 footer {
   margin-top: 50px;
   text-align: center;
@@ -115,6 +124,7 @@ footer {
 }
 </style>
 </head>
+
 <body>
 <header>
   <a class="brand" href="/">#GUNEO</a>
@@ -167,10 +177,18 @@ footer {
 <textarea id="message" name="message"
   maxlength="5000" required></textarea>
 
+<!-- 迷惑送信対策用の隠し項目 -->
 <input type="text" name="website"
   tabindex="-1" autocomplete="off"
   aria-hidden="true"
   style="position:absolute;left:-9999px">
+
+<!-- Cloudflare Turnstile -->
+<div class="turnstile-box">
+  <div class="cf-turnstile"
+    data-sitekey="0x4AAAAAAF13W7-olr2Djw_u"
+    data-theme="dark"></div>
+</div>
 
 <button class="send-button" id="sendButton"
   type="submit"
@@ -231,6 +249,20 @@ document.getElementById("contactForm")
     const button = document.getElementById("sendButton");
     const status = document.getElementById("status");
 
+    const tokenField =
+      form.querySelector('[name="cf-turnstile-response"]');
+
+    const turnstileToken = tokenField
+      ? tokenField.value : "";
+
+    if (!turnstileToken) {
+      status.style.color = "#ff9a9a";
+      status.textContent = currentLanguage === "ja"
+        ? "認証が完了していません。少し待ってから再度お試しください。"
+        : "Verification is not complete. Please try again.";
+      return;
+    }
+
     button.disabled = true;
     status.style.color = "#e9efff";
     status.textContent = currentLanguage === "ja"
@@ -246,7 +278,8 @@ document.getElementById("contactForm")
           name: form.elements.namedItem("name").value,
           email: form.elements.namedItem("email").value,
           message: form.elements.namedItem("message").value,
-          website: form.elements.namedItem("website").value
+          website: form.elements.namedItem("website").value,
+          turnstileToken: turnstileToken
         })
       });
 
@@ -260,6 +293,7 @@ document.getElementById("contactForm")
       status.textContent = currentLanguage === "ja"
         ? "お問い合わせを送信しました！"
         : "Your message has been sent!";
+
       form.reset();
 
     } catch (error) {
@@ -268,6 +302,9 @@ document.getElementById("contactForm")
         ? "送信できませんでした。時間をおいて再度お試しください。"
         : "Could not send your message. Please try again later.";
     } finally {
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
       button.disabled = false;
     }
   });
