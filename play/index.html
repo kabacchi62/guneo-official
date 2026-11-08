@@ -540,6 +540,7 @@ generate();
 last=performance.now();
 }
 
+
 function end(){
 if(state!=='playing')return;
 
@@ -549,11 +550,26 @@ flash=1;
 hint.hidden=true;
 
 const n=Math.floor(score);
-if(n>best){
+const isNewBest=n>best;
+
+if(isNewBest){
 best=n;
 writeBest(n);
 }
 updateBest();
+
+// GA4：ゲームオーバーの記録
+if(typeof gtag==='function'){
+gtag('event','game_over',{
+game_mode:mode,
+game_speed:mode==='hard'?hardSpeed:1,
+game_language:language,
+game_score:n,
+play_time_seconds:Math.round(time),
+new_best:isNewBest?1:0,
+game_platform:'official_web'
+});
+}
 }
 
 function showGameOver(){
