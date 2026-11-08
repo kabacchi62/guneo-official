@@ -983,6 +983,7 @@ a.remove();
 setTimeout(()=>URL.revokeObjectURL(url),30000);
 }
 
+
 shareScore.onclick=async()=>{
 try{
 const blob=await scoreBlob();
@@ -1010,6 +1011,18 @@ title:t('shareTitle'),
 text
 });
 showShareStatus('shareOpened');
+
+// GA4：スコア共有を記録
+if(typeof gtag==='function'){
+gtag('event','score_share',{
+game_mode:mode,
+game_speed:mode==='hard'?hardSpeed:1,
+game_language:language,
+game_score:Math.floor(score),
+game_platform:'official_web'
+});
+}
+
 }catch(e){
 if(e.name!=='AbortError'){
 showShareStatus('shareFailed');
@@ -1018,11 +1031,23 @@ showShareStatus('shareFailed');
 }else{
 downloadBlob(blob);
 showShareStatus('savedHelp');
+
+// GA4：共有非対応端末での画像保存を記録
+if(typeof gtag==='function'){
+gtag('event','score_download',{
+game_mode:mode,
+game_speed:mode==='hard'?hardSpeed:1,
+game_language:language,
+game_score:Math.floor(score),
+game_platform:'official_web'
+});
+}
 }
 }catch(e){
 showShareStatus('imageFailed');
 }
 };
+
 
 
 saveScore.onclick=async()=>{
