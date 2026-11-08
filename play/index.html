@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -24,8 +25,10 @@ button:active{transform:scale(.97)}
 #hint{position:absolute;bottom:20px;font-size:12px;color:#d5e4f5a8;text-align:center;padding:0 15px}
 #result{font-size:35px;font-weight:900;color:#fbbf24;margin:12px 0}
 #modeTag{color:#67e8f9;font-weight:800;font-size:13px;letter-spacing:.12em}
-#panel[hidden],#hint[hidden],#custom[hidden]{display:none}
+#panel[hidden],#hint[hidden],#custom[hidden],#result[hidden],#shareScore[hidden],#saveScore[hidden],#shareStatus[hidden]{display:none}
 #customize{width:100%;margin-top:10px;background:#253a53;color:#e4f7ff}
+#shareScore,#saveScore{width:100%;margin-top:10px;background:#253a53;color:#e4f7ff;font-size:14px}
+#shareStatus{font-size:12px;margin:9px 0;color:#67e8f9}
 #officialSite{display:block;width:100%;margin-top:10px;padding:14px 22px;min-height:49px;border-radius:14px;background:#253a53;color:#e4f7ff;font-size:14px;font-weight:800;text-decoration:none;text-align:center}
 #officialSite:active{transform:scale(.97)}
 #officialSite:focus-visible{outline:2px solid #67e8f9;outline-offset:3px}
@@ -42,6 +45,36 @@ button:active{transform:scale(.97)}
 #speedPick button{flex:1;padding:11px 4px;min-height:43px;background:#26364c;color:#d5e4f5;border:2px solid transparent}
 #speedPick button.selected{border-color:#67e8f9;background:#16485b;color:#fff}
 #preview{width:100%;height:110px;background:#172438;border-radius:14px}
+
+/* Language switch */
+#languageSwitch{
+position:fixed;
+top:14px;
+right:14px;
+z-index:10;
+pointer-events:auto;
+display:flex;
+gap:4px;
+padding:4px;
+border:1px solid #536784;
+border-radius:12px;
+background:#101b2ef0;
+box-shadow:0 4px 18px #0006;
+}
+#languageSwitch button{
+min-height:32px;
+padding:5px 11px;
+border-radius:8px;
+font-size:12px;
+background:transparent;
+color:#cbd5e1;
+}
+#languageSwitch button.selected{
+background:#67e8f9;
+color:#101b2e;
+}
+#hud{padding-top:62px}
+#hint{max-width:95%}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHJ4ZNK6ZB"></script>
 <script>
@@ -54,10 +87,17 @@ gtag('config','G-CHJ4ZNK6ZB');
 <body>
 <canvas id="game"></canvas>
 <div id="ui">
+
+<div id="languageSwitch" role="group" aria-label="Language">
+<button id="langJP" type="button">JP</button>
+<button id="langEN" type="button">EN</button>
+</div>
+
 <div id="hud">
 <div id="score">0 m</div>
 <div id="best">BEST<br>0 m</div>
 </div>
+
 <div id="panel">
 <div id="modeTag">ONE TAP ACTION</div>
 <h1 id="title">#ぐねお</h1>
@@ -82,17 +122,20 @@ gtag('config','G-CHJ4ZNK6ZB');
 <p id="shareStatus" role="status" hidden></p>
 <a id="officialSite" href="https://guneo.net/">⌂ 公式サイトに戻る</a>
 </div>
+
 <div id="custom" hidden>
-<h2>COLOR CUSTOMIZE</h2>
+<h2 id="customTitle">COLOR CUSTOMIZE</h2>
 <canvas id="preview"></canvas>
-<p>頭の色</p>
+<p id="headLabel">頭の色</p>
 <div class="swatches" id="headColors"></div>
-<p>体の色</p>
+<p id="bodyLabel">体の色</p>
 <div class="swatches" id="bodyColors"></div>
 <button id="done">決定して戻る</button>
 </div>
+
 <div id="hint">画面タップ / クリック / スペースキーでジャンプ</div>
 </div>
+
 <script>
 (()=>{
 'use strict';
@@ -113,6 +156,154 @@ hint=document.getElementById('hint');
 const custom=document.getElementById('custom'),
 preview=document.getElementById('preview'),
 pc=preview.getContext('2d');
+
+/* ==========================
+   LANGUAGE SYSTEM
+========================== */
+
+const translations={
+ja:{
+pageTitle:'#ぐねお v1.3',
+gameTitle:'#ぐねお',
+intro:'タップするたびにポンッと上昇！<br>壁に触れず、どこまで進める？',
+start:'ゲームスタート',
+retry:'もう一度挑戦',
+gameOver:'ゲームオーバー',
+easyOver:'連打のリズムをつかんでもう一度！',
+hardOver:'頭だけでなく、体も壁に触れないように！',
+customize:'カラーをカスタマイズ',
+customTitle:'COLOR CUSTOMIZE',
+headLabel:'頭の色',
+bodyLabel:'体の色',
+done:'決定して戻る',
+official:'⌂ 公式サイトに戻る',
+hint:'画面タップ / クリック / スペースキーでジャンプ',
+share:'スコア画像をシェア',
+save:'画像を保存',
+shareOpened:'共有メニューを開きました',
+shareFailed:'共有できませんでした。「画像を保存」をお試しください',
+saved:'画像を保存しました',
+savedHelp:'画像を保存しました。SNSの投稿画面から画像を添付してください',
+imageFailed:'画像の作成に失敗しました',
+saveFailed:'画像の保存に失敗しました',
+blobFailed:'画像を作成できませんでした',
+shareTitle:'#ぐねお スコア',
+shareChallenge:'君はこの記録を超えられる？',
+freeChallenge:'無料で挑戦！',
+yourScore:'YOUR SCORE',
+shareText:(m,s,n)=>'#ぐねお '+m+(m==='HARD'?' ×'+s:'')+
+' で '+n+'m 達成！\n君はこの記録を超えられる？\n'
+},
+en:{
+pageTitle:'#GUNEO v1.3',
+gameTitle:'#GUNEO',
+intro:'Tap to bounce upward!<br>Avoid the walls. How far can you go?',
+start:'START GAME',
+retry:'PLAY AGAIN',
+gameOver:'GAME OVER',
+easyOver:'Find your tapping rhythm and try again!',
+hardOver:'Keep both your head and body away from the walls!',
+customize:'CUSTOMIZE COLORS',
+customTitle:'COLOR CUSTOMIZE',
+headLabel:'Head Color',
+bodyLabel:'Body Color',
+done:'SAVE & RETURN',
+official:'⌂ BACK TO OFFICIAL SITE',
+hint:'Tap / Click / Press Space to jump',
+share:'SHARE SCORE IMAGE',
+save:'SAVE IMAGE',
+shareOpened:'Share menu opened',
+shareFailed:'Could not share. Please try Save Image.',
+saved:'Image saved',
+savedHelp:'Image downloaded. Attach it to your social media post.',
+imageFailed:'Failed to create score image',
+saveFailed:'Failed to save image',
+blobFailed:'Could not create image',
+shareTitle:'#GUNEO Score',
+shareChallenge:'Can you beat my score?',
+freeChallenge:'PLAY FREE!',
+yourScore:'YOUR SCORE',
+shareText:(m,s,n)=>'I scored '+n+'m in #GUNEO '+
+m+(m==='HARD'?' ×'+s:'')+
+'!\nCan you beat my score?\n'
+}
+};
+
+function detectLanguage(){
+try{
+const saved=localStorage.getItem('guneo-language');
+if(saved==='ja'||saved==='en')return saved;
+}catch{}
+
+const languages=navigator.languages&&navigator.languages.length?
+navigator.languages:[navigator.language||'en'];
+
+return String(languages[0]||'en').toLowerCase().startsWith('ja')?
+'ja':'en';
+}
+
+let language=detectLanguage();
+
+function t(key){
+return translations[language][key];
+}
+
+function saveLanguage(){
+try{
+localStorage.setItem('guneo-language',language);
+}catch{}
+}
+
+function updateLanguage(){
+document.documentElement.lang=language;
+document.title=t('pageTitle');
+
+document.getElementById('langJP').classList.toggle('selected',language==='ja');
+document.getElementById('langEN').classList.toggle('selected',language==='en');
+document.getElementById('langJP').setAttribute('aria-pressed',String(language==='ja'));
+document.getElementById('langEN').setAttribute('aria-pressed',String(language==='en'));
+
+document.getElementById('customize').textContent=t('customize');
+document.getElementById('customTitle').textContent=t('customTitle');
+document.getElementById('headLabel').textContent=t('headLabel');
+document.getElementById('bodyLabel').textContent=t('bodyLabel');
+document.getElementById('done').textContent=t('done');
+document.getElementById('officialSite').textContent=t('official');
+document.getElementById('shareScore').textContent=t('share');
+document.getElementById('saveScore').textContent=t('save');
+hint.textContent=t('hint');
+
+if(state==='over'){
+title.textContent=t('gameOver');
+desc.textContent=mode==='hard'?t('hardOver'):t('easyOver');
+start.textContent=t('retry');
+}else{
+title.textContent=t('gameTitle');
+desc.innerHTML=t('intro');
+start.textContent=t('start');
+}
+
+const status=document.getElementById('shareStatus');
+if(!status.hidden&&status.dataset.messageKey){
+status.textContent=t(status.dataset.messageKey);
+}
+
+updateBest();
+}
+
+function setLanguage(next){
+if(next!=='ja'&&next!=='en')return;
+language=next;
+saveLanguage();
+updateLanguage();
+}
+
+document.getElementById('langJP').onclick=()=>setLanguage('ja');
+document.getElementById('langEN').onclick=()=>setLanguage('en');
+
+/* ==========================
+   COLOR CUSTOMIZE
+========================== */
 
 const palette=[
 '#facc15','#63e68d','#42c9ff',
@@ -188,6 +379,10 @@ custom.hidden=true;
 panel.hidden=false;
 };
 
+/* ==========================
+   GAME STATE
+========================== */
+
 let W=0,H=0,dpr=1,
 mode='easy',
 state='menu',
@@ -202,7 +397,6 @@ samples=[],
 time=0,
 flash=0;
 
-// ゲームオーバー画面の表示待ち時間
 const GAME_OVER_DELAY=0.5;
 let gameOverTimer=0;
 
@@ -310,13 +504,15 @@ function begin(){
 if(typeof gtag==='function'){
 gtag('event','game_start',{
 game_mode:mode,
-game_speed:mode==='hard'?hardSpeed:1
+game_speed:mode==='hard'?hardSpeed:1,
+game_language:language
 });
 }
 
 document.getElementById('shareScore').hidden=true;
 document.getElementById('saveScore').hidden=true;
 document.getElementById('shareStatus').hidden=true;
+document.getElementById('shareStatus').dataset.messageKey='';
 
 state='playing';
 gameOverTimer=0;
@@ -344,7 +540,6 @@ generate();
 last=performance.now();
 }
 
-// 衝突時はゲームを停止し、0.5秒後に結果表示
 function end(){
 if(state!=='playing')return;
 
@@ -361,7 +556,6 @@ writeBest(n);
 updateBest();
 }
 
-// 待ち時間終了後にゲームオーバー画面を表示
 function showGameOver(){
 if(state!=='dying')return;
 
@@ -372,16 +566,15 @@ document.getElementById('saveScore').hidden=false;
 
 const n=Math.floor(score);
 
-title.innerHTML='ゲームオーバー';
+title.textContent=t('gameOver');
 
-desc.innerHTML=mode==='hard'?
-'頭だけでなく、体も壁に触れないように！':
-'連打のリズムをつかんでもう一度！';
+desc.textContent=mode==='hard'?
+t('hardOver'):t('easyOver');
 
 result.hidden=false;
 result.textContent=n+' m';
 modes.style.display='flex';
-start.textContent='もう一度挑戦';
+start.textContent=t('retry');
 panel.hidden=false;
 hint.hidden=true;
 }
@@ -405,6 +598,10 @@ e.preventDefault();
 if(!e.repeat)tap();
 }
 });
+
+/* ==========================
+   BODY MOVEMENT
+========================== */
 
 function smoothBodyY(i){
 if(i<=0)return headY;
@@ -504,6 +701,10 @@ return;
 }
 }
 }
+
+/* ==========================
+   DRAW GAME
+========================== */
 
 function draw(){
 ctx.clearRect(0,0,W,H);
@@ -627,13 +828,18 @@ flash*=.9;
 }
 }
 
+/* ==========================
+   SCORE IMAGE & SHARING
+========================== */
+
 const PLAY_URL='https://guneo.net/play/';
 const shareScore=document.getElementById('shareScore');
 const saveScore=document.getElementById('saveScore');
 const shareStatus=document.getElementById('shareStatus');
 
-function showShareStatus(message){
-shareStatus.textContent=message;
+function showShareStatus(messageKey){
+shareStatus.dataset.messageKey=messageKey;
+shareStatus.textContent=t(messageKey);
 shareStatus.hidden=false;
 }
 
@@ -661,7 +867,7 @@ g.fillText('ONE TAP ACTION',540,135);
 
 g.fillStyle='#ffffff';
 g.font='bold 108px sans-serif';
-g.fillText('#ぐねお',540,285);
+g.fillText(t('gameTitle'),540,285);
 
 g.fillStyle='#67e8f9';
 g.font='bold 38px sans-serif';
@@ -669,7 +875,7 @@ g.fillText('#GUNEO SCORE CHALLENGE',540,365);
 
 g.fillStyle='#cbd5e1';
 g.font='bold 40px sans-serif';
-g.fillText('YOUR SCORE',540,500);
+g.fillText(t('yourScore'),540,500);
 
 const n=Math.floor(score);
 g.fillStyle='#fbbf24';
@@ -692,11 +898,11 @@ g.stroke();
 
 g.fillStyle='#ffffff';
 g.font='bold 47px sans-serif';
-g.fillText('君はこの記録を超えられる？',540,960);
+g.fillText(t('shareChallenge'),540,960);
 
 g.fillStyle='#67e8f9';
 g.font='bold 44px sans-serif';
-g.fillText('無料で挑戦！',540,1045);
+g.fillText(t('freeChallenge'),540,1045);
 
 g.fillStyle='#ffffff';
 g.font='bold 27px sans-serif';
@@ -713,7 +919,7 @@ function scoreBlob(){
 return new Promise((resolve,reject)=>{
 makeScoreCanvas().toBlob(
 b=>b?resolve(b):
-reject(new Error('画像を作成できませんでした')),
+reject(new Error(t('blobFailed'))),
 'image/png'
 );
 });
@@ -742,12 +948,11 @@ const file=new File(
 {type:'image/png'}
 );
 
-const text='#ぐねお '+
-mode.toUpperCase()+
-(mode==='hard'?' ×'+hardSpeed:'')+
-' で '+Math.floor(score)+
-'m 達成！\n君はこの記録を超えられる？\n'+
-PLAY_URL+'\n#GUNEO';
+const text=t('shareText')(
+mode.toUpperCase(),
+hardSpeed,
+Math.floor(score)
+)+PLAY_URL+'\n#GUNEO';
 
 if(
 navigator.share&&
@@ -757,39 +962,37 @@ navigator.canShare({files:[file]})
 try{
 await navigator.share({
 files:[file],
-title:'#ぐねお スコア',
+title:t('shareTitle'),
 text
 });
-showShareStatus('共有メニューを開きました');
+showShareStatus('shareOpened');
 }catch(e){
 if(e.name!=='AbortError'){
-showShareStatus(
-'共有できませんでした。「画像を保存」をお試しください'
-);
+showShareStatus('shareFailed');
 }
 }
 }else{
 downloadBlob(blob);
-showShareStatus(
-'画像を保存しました。SNSの投稿画面から画像を添付してください'
-);
+showShareStatus('savedHelp');
 }
 }catch(e){
-showShareStatus('画像の作成に失敗しました');
+showShareStatus('imageFailed');
 }
 };
 
 saveScore.onclick=async()=>{
 try{
 downloadBlob(await scoreBlob());
-showShareStatus('画像を保存しました');
+showShareStatus('saved');
 }catch(e){
-showShareStatus('画像の保存に失敗しました');
+showShareStatus('saveFailed');
 }
 };
 
-// ゲームループ
-// 衝突後は画面を停止し、0.5秒経過で結果を表示
+/* ==========================
+   GAME LOOP
+========================== */
+
 function frame(now){
 let dt=Math.min((now-last)/1000||0,.034);
 last=now;
@@ -809,7 +1012,7 @@ requestAnimationFrame(frame);
 
 resize();
 updateSpeedUI();
-updateBest();
+updateLanguage();
 requestAnimationFrame(frame);
 
 })();
