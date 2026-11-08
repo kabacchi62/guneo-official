@@ -372,11 +372,24 @@ const b=document.createElement('button');
 b.className='swatch'+(value===c?' active':'');
 b.style.background=c;
 b.setAttribute('aria-label',c);
+
 b.onclick=()=>{
 set(c);
 saveColors();
+
+// GA4：カラー変更の記録
+if(typeof gtag==='function'){
+gtag('event','customize_color',{
+color_part:id==='headColors'?'head':'body',
+color_value:c,
+game_language:language,
+game_platform:'official_web'
+});
+}
+
 renderColors();
 };
+
 el.appendChild(b);
 }
 }
@@ -1011,14 +1024,28 @@ showShareStatus('imageFailed');
 }
 };
 
+
 saveScore.onclick=async()=>{
 try{
 downloadBlob(await scoreBlob());
 showShareStatus('saved');
+
+// GA4：スコア画像の保存を記録
+if(typeof gtag==='function'){
+gtag('event','score_download',{
+game_mode:mode,
+game_speed:mode==='hard'?hardSpeed:1,
+game_language:language,
+game_score:Math.floor(score),
+game_platform:'official_web'
+});
+}
+
 }catch(e){
 showShareStatus('saveFailed');
 }
 };
+
 
 /* ==========================
    GAME LOOP
