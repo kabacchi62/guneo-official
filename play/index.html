@@ -291,12 +291,27 @@ status.textContent=t(status.dataset.messageKey);
 updateBest();
 }
 
+
 function setLanguage(next){
 if(next!=='ja'&&next!=='en')return;
+if(language===next)return;
+
+const previousLanguage=language;
+
 language=next;
 saveLanguage();
 updateLanguage();
+
+// GA4：言語切り替えの記録
+if(typeof gtag==='function'){
+gtag('event','language_change',{
+previous_language:previousLanguage,
+game_language:language,
+game_platform:'official_web'
+});
 }
+}
+
 
 document.getElementById('langJP').onclick=()=>setLanguage('ja');
 document.getElementById('langEN').onclick=()=>setLanguage('en');
