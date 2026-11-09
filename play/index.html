@@ -75,6 +75,30 @@ color:#101b2e;
 }
 #hud{padding-top:62px}
 #hint{max-width:95%}
+
+/* Small-window support: keep all menu and game-over controls reachable. */
+#panel,#custom{
+  max-height:calc(100dvh - 20px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  touch-action:pan-y;
+  scrollbar-width:thin;
+}
+#panel button,#panel a,#custom button{touch-action:manipulation}
+@media (max-height:700px){
+  #panel{padding:15px 18px;border-radius:18px}
+  #panel h1{font-size:clamp(20px,5vw,26px);margin:2px 0 6px}
+  #panel p{margin:6px 0;font-size:13px;line-height:1.5}
+  #panel .modes{margin:10px 0;gap:8px}
+  #panel button{min-height:40px;padding:9px 12px}
+  #panel #speedPick{margin:0 0 9px}
+  #panel #speedPick button{min-height:36px;padding:7px 4px}
+  #panel #result{font-size:28px;margin:6px 0}
+  #panel #officialSite{min-height:40px;padding:10px 12px}
+  #panel #customize,#panel #shareScore,#panel #saveScore{margin-top:7px}
+  #custom{padding:15px}
+  #custom .swatches{margin:8px 0 12px}
+}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHJ4ZNK6ZB"></script>
 <script>
@@ -323,6 +347,20 @@ game_platform:'official_web'
 
 document.getElementById('langJP').onclick=()=>setLanguage('ja');
 document.getElementById('langEN').onclick=()=>setLanguage('en');
+
+/* Return to the official site: close the host popup when embedded. */
+document.getElementById('officialSite').addEventListener('click',event=>{
+  if(!isEmbeddedDemo)return; // Standalone demo: follow the normal link.
+  event.preventDefault();
+  try{
+    if(window.parent && typeof window.parent.closeGame==='function'){
+      window.parent.closeGame();
+      return;
+    }
+  }catch(error){ /* If embedding origin differs, navigate the top page. */ }
+  window.top.location.href='https://guneo.net/';
+});
+
 
 /* ==========================
    COLOR CUSTOMIZE
