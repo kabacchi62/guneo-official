@@ -1205,7 +1205,7 @@ function openGame(event) {
   gameModal.hidden = false;
   document.body.classList.add('game-modal-open');
   document.body.style.overflow = 'hidden';
-  gameFrame.src = '/play/';
+  gameFrame.src = '/play/?embed=1&lang=' + encodeURIComponent(currentLanguage);
   closeGameButton.focus();
   if (typeof gtag === 'function') {
     gtag('event', 'web_demo_popup_open', { game_platform: 'official_site' });
