@@ -463,17 +463,18 @@ body.game-modal-open { overflow: hidden; }
   width: min(440px, 100%);
   height: min(850px, calc(100dvh - 40px));
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   border: 2px solid #4865a0;
   border-radius: 22px;
   background: #0b1322;
   box-shadow: 0 20px 80px #000b;
 }
-.game-modal-frame { display: block; width: 100%; height: 100%; border: 0; }
+.game-modal-toolbar { flex: 0 0 58px; display: flex; align-items: center; justify-content: flex-end; padding: 6px 12px; background: #101b2e; border-bottom: 1px solid #354a7c; }
+.game-modal-frame { display: block; width: 100%; height: 0; flex: 1 1 auto; min-height: 0; border: 0; }
 .game-modal-close {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 10px;
-  right: 10px;
   width: 44px;
   height: 44px;
   border: 1px solid #8ca7c8;
@@ -488,7 +489,7 @@ body.game-modal-open { overflow: hidden; }
 @media (max-width: 600px) {
   .game-modal { padding: 0; }
   .game-modal-window { width: 100%; height: 100dvh; border: 0; border-radius: 0; }
-  .game-modal-close { top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); }
+  .game-modal-toolbar { flex-basis: calc(58px + env(safe-area-inset-top)); padding-top: calc(6px + env(safe-area-inset-top)); padding-right: max(12px, env(safe-area-inset-right)); }
 }
 </style>
 
@@ -1052,7 +1053,7 @@ body.game-modal-open { overflow: hidden; }
 <!-- WEB体験版ポップアップ：開くまでゲームを読み込まない -->
 <div id="gameModal" class="game-modal" hidden>
   <div class="game-modal-window" role="dialog" aria-modal="true" aria-label="WEB体験版" id="gameDialog">
-    <button id="closeGameButton" class="game-modal-close" type="button" aria-label="ゲームを閉じる" title="閉じる">×</button>
+    <div class="game-modal-toolbar"><button id="closeGameButton" class="game-modal-close" type="button" aria-label="ゲームを閉じる" title="閉じる">×</button></div>
     <iframe id="gameFrame" class="game-modal-frame" title="#ぐねお WEB体験版" allow="fullscreen" loading="eager"></iframe>
   </div>
 </div>
