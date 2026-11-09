@@ -242,7 +242,15 @@ return String(languages[0]||'en').toLowerCase().startsWith('ja')?
 'ja':'en';
 }
 
-let language=detectLanguage();
+const gameParams=new URLSearchParams(window.location.search);
+const isEmbeddedDemo=window.parent!==window && gameParams.get('embed')==='1';
+const requestedLanguage=gameParams.get('lang');
+let language=(isEmbeddedDemo && (requestedLanguage==='ja'||requestedLanguage==='en'))
+  ? requestedLanguage : detectLanguage();
+if(isEmbeddedDemo){
+  document.getElementById('languageSwitch').style.display='none';
+  document.getElementById('hud').style.paddingTop='20px';
+}
 
 function t(key){
 return translations[language][key];
