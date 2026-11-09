@@ -261,7 +261,8 @@ h2 {
   text-decoration: none;
   cursor: pointer;
 }
-.share-line { background: #06c755; }
+.share-line { background: #06c755; } 
+.share-reddit { background: #FF4500; }
 .share-x {
   background: #171717;
   border: 1px solid #555;
@@ -745,9 +746,9 @@ body.game-modal-open { overflow: hidden; }
 <div class="share-panel">
 <p class="share-title" data-en="Share #GUNEO with friends!" data-ja="友達に #ぐねお を広めよう！">Share #GUNEO with friends!</p>
 <div class="share-grid">
-<a class="share-btn share-line" href="#" onclick="shareLine(event)">
-          LINE
-        </a>
+<a class="share-btn share-reddit" href="#" onclick="shareReddit(event)">
+  Reddit
+</a>
 <a class="share-btn share-x" href="#" onclick="shareX(event)">
           X (Twitter)
         </a>
@@ -890,6 +891,22 @@ function shareText() {
   return currentLanguage === "ja"
     ? "タップで進め！どこまで行ける？\n無料ゲーム『#ぐねお』に挑戦！\n#GUNEO"
     : "Tap to fly! How far can you go?\nPlay #GUNEO for free!";
+}
+
+function shareReddit(event) {
+  event.preventDefault();
+
+  const url =
+    "https://www.reddit.com/submit?url=" +
+    encodeURIComponent(shareUrl) +
+    "&title=" +
+    encodeURIComponent("Can you beat my score? Play #GUNEO for free!");
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
 }
 
 function shareLine(event) {
