@@ -705,11 +705,23 @@ if(state!=='playing')return;
 vel=Math.max(vel-275,-410);
 }
 
-addEventListener('pointerdown',e=>{
-if(e.target.closest('button')||e.target.closest('#panel'))return;
-e.preventDefault();
-tap();
-},{passive:false});
+
+function handleGamePointer(e){
+  if(state!=='playing')return;
+  if(e.target.closest('#panel, #custom, #languageSwitch'))return;
+
+  e.preventDefault();
+  tap();
+}
+
+canvas.addEventListener('pointerdown',handleGamePointer,{passive:false});
+
+document.getElementById('ui').addEventListener(
+  'pointerdown',
+  handleGamePointer,
+  {passive:false}
+);
+
 
 addEventListener('keydown',e=>{
 if(e.code==='Space'||e.code==='ArrowUp'){
