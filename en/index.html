@@ -263,6 +263,7 @@ h2 {
 }
 .share-line { background: #06c755; } 
 .share-reddit { background: #FF4500; }
+.share-whatsapp { background: #168C54; }
 .share-x {
   background: #171717;
   border: 1px solid #555;
@@ -752,7 +753,9 @@ body.game-modal-open { overflow: hidden; }
 <a class="share-btn share-x" href="#" onclick="shareX(event)">
           X (Twitter)
         </a>
-<button class="share-btn share-native" data-en="More options" data-ja="その他に共有" onclick="shareNative(this)" type="button">More options</button>
+<a class="share-btn share-whatsapp" href="#" onclick="shareWhatsApp(event)">
+  WhatsApp
+</a>
 <button class="share-btn share-copy" data-en="Copy URL" data-ja="URLをコピー" onclick="copyShareUrl(this)" type="button">Copy URL</button>
 </div>
 <p aria-live="polite" class="share-status"></p>
@@ -891,6 +894,21 @@ function shareText() {
   return currentLanguage === "ja"
     ? "タップで進め！どこまで行ける？\n無料ゲーム『#ぐねお』に挑戦！\n#GUNEO"
     : "Tap to fly! How far can you go?\nPlay #GUNEO for free!";
+}
+
+function shareWhatsApp(event) {
+  event.preventDefault();
+
+  const text =
+    "Can you beat my score? Play #GUNEO for free!\n" +
+    shareUrl;
+
+  window.open(
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text),
+    "_blank",
+    "noopener,noreferrer"
+  );
 }
 
 function shareReddit(event) {
