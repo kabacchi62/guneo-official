@@ -1165,22 +1165,11 @@ body.game-modal-open { overflow: hidden; }
 <script>
 let currentLanguage = "ja";
 
+
 function toggleLanguage() {
-  currentLanguage =
-    currentLanguage === "ja" ? "en" : "ja";
-
-  document.documentElement.lang = currentLanguage;
-
-  document.querySelectorAll(
-    "[data-ja][data-en]"
-  ).forEach(element => {
-    element.textContent =
-      element.getAttribute("data-" + currentLanguage);
-  });
-
-  document.getElementById("langButton").textContent =
-    currentLanguage === "ja" ? "ENGLISH" : "日本語";
+  window.location.href = "https://guneo.net/en/";
 }
+
 
 function showGameplayImage() {
   document.getElementById("gameplayImage").style.display = "block";
