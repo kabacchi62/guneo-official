@@ -527,6 +527,79 @@ body.game-modal-open { overflow: hidden; }
   .share-grid { gap: 8px; }
   .share-btn { font-size: 12px; }
 }
+
+/* 2026-11: トップページの演出強化（既存機能は変更しない） */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -18% -35%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 30% 35%, rgba(35,191,255,.13), transparent 46%),
+    radial-gradient(ellipse at 75% 58%, rgba(117,91,255,.15), transparent 48%);
+  animation: guneo-ambient 16s ease-in-out infinite alternate;
+}
+.hero-logo {
+  animation: guneo-logo-enter .85s cubic-bezier(.2,.8,.2,1) both;
+  filter: drop-shadow(0 0 23px rgba(39,217,255,.30));
+}
+.english-title, .tagline, .hero > .sub {
+  animation: guneo-copy-enter .75s ease-out both;
+}
+.english-title { animation-delay: .12s; }
+.tagline { animation-delay: .22s; }
+.hero > .sub { animation-delay: .30s; }
+.web-trial-panel {
+  position: relative;
+  background: linear-gradient(155deg, #1b2c58, #142041 75%);
+  border-color: #456397;
+  box-shadow: 0 14px 42px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.04);
+  animation: guneo-copy-enter .75s ease-out .36s both;
+}
+.play-button {
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .25s ease, filter .2s ease;
+  box-shadow: 0 9px 27px rgba(25,213,255,.26), 0 0 0 1px rgba(255,255,255,.08) inset;
+  animation: guneo-button-glow 3.5s ease-in-out infinite;
+}
+.play-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 13px 32px rgba(25,213,255,.38);
+}
+.play-button:active { transform: scale(.98); }
+.play-button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.lang-button { transition: background .2s ease, border-color .2s ease; }
+.lang-button:hover { background: #344c78; border-color: #9eeaff; }
+.lang-button:focus-visible { outline: 3px solid #9eeaff; outline-offset: 3px; }
+@keyframes guneo-ambient {
+  from { transform: translate3d(-3%, -1%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.06); }
+}
+@keyframes guneo-logo-enter {
+  from { opacity: 0; transform: translateY(15px) scale(.965); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes guneo-copy-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes guneo-button-glow {
+  0%, 100% { box-shadow: 0 8px 25px rgba(25,213,255,.22); }
+  50% { box-shadow: 0 9px 31px rgba(25,213,255,.40); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before, .hero-logo, .english-title, .tagline,
+  .hero > .sub, .web-trial-panel, .play-button { animation: none !important; }
+  .play-button, .lang-button { transition: none; }
+}
+
 </style>
 
 <!-- Google Analytics (GA4) -->
