@@ -491,6 +491,42 @@ body.game-modal-open { overflow: hidden; }
   .game-modal-window { width: 100%; height: 100dvh; border: 0; border-radius: 0; }
   .game-modal-toolbar { flex-basis: calc(58px + env(safe-area-inset-top)); padding-top: calc(6px + env(safe-area-inset-top)); padding-right: max(12px, env(safe-area-inset-right)); }
 }
+
+/* スマホ最適化：PC表示は維持 */
+@media (max-width: 600px) {
+  html, body { max-width: 100%; overflow-x: clip; }
+  header { padding: 12px 5%; min-height: 62px; }
+  .brand { font-size: 19px; letter-spacing: 1.5px; }
+  .lang-button { min-height: 44px; padding: 9px 15px; }
+  .hero { padding: 22px 16px 34px; }
+  .hero h1 { margin: 0; }
+  .hero-logo { width: min(100%, 430px); margin: 0 auto 6px; }
+  .english-title { font-size: 16px; letter-spacing: 4px; margin-bottom: 12px; }
+  .tagline { font-size: clamp(19px, 5.1vw, 25px); line-height: 1.45; margin: 0 auto 10px; }
+  .sub { font-size: 14px; line-height: 1.65; }
+  .hero > .sub { margin: 0 auto 20px; }
+  .web-trial-panel { margin-top: 16px; padding: 18px 15px; border-radius: 20px; }
+  .trial-label { font-size: clamp(16px, 4.6vw, 20px); }
+  .play-button { margin: 15px auto 10px; min-height: 54px; display: flex; align-items: center; justify-content: center; padding: 13px 15px; }
+  .trial-note { margin: 8px 0 0; font-size: 12px; }
+  .android-status { margin-top: 23px; }
+  .android-title { font-size: 18px; }
+  section { padding: 38px 16px; }
+  h2 { margin-top: 0; margin-bottom: 20px; }
+  .cards, .guide-grid { gap: 14px; margin-top: 20px; }
+  .card, .guide-card { padding: 22px 18px; }
+  .share-after-gameplay { padding-top: 10px; }
+  .share-panel { margin-top: 0; padding: 20px 15px; }
+  .share-btn { min-height: 48px; }
+  .gameplay-box { padding: 22px 14px; }
+  .gameplay-video { max-width: min(310px, 100%); }
+}
+@media (max-width: 360px) {
+  .hero { padding-left: 12px; padding-right: 12px; }
+  .tagline { font-size: 18px; }
+  .share-grid { gap: 8px; }
+  .share-btn { font-size: 12px; }
+}
 </style>
 
 <!-- Google Analytics (GA4) -->
@@ -563,47 +599,6 @@ body.game-modal-open { overflow: hidden; }
         data-en="No installation needed — play in your browser.">
         インストール不要・ブラウザですぐ遊べる
       </p>
-    </div>
-
-    <!-- SNS共有：上部 -->
-    <div class="share-panel">
-      <p class="share-title"
-        data-ja="友達に #ぐねお を広めよう！"
-        data-en="Share #GUNEO with friends!">
-        友達に #ぐねお を広めよう！
-      </p>
-
-      <div class="share-grid">
-        <a class="share-btn share-line"
-           href="#"
-           onclick="shareLine(event)">
-          LINE
-        </a>
-
-        <a class="share-btn share-x"
-           href="#"
-           onclick="shareX(event)">
-          X (Twitter)
-        </a>
-
-        <button class="share-btn share-native"
-          type="button"
-          onclick="shareNative(this)"
-          data-ja="その他に共有"
-          data-en="More options">
-          その他に共有
-        </button>
-
-        <button class="share-btn share-copy"
-          type="button"
-          onclick="copyShareUrl(this)"
-          data-ja="URLをコピー"
-          data-en="Copy URL">
-          URLをコピー
-        </button>
-      </div>
-
-      <p class="share-status" aria-live="polite"></p>
     </div>
 
     <div class="android-status">
@@ -778,6 +773,50 @@ body.game-modal-open { overflow: hidden; }
     実際のゲームプレイ動画です。
   </p>
 </div>
+
+  </section>
+
+  <section id="share-after-gameplay" class="share-after-gameplay">
+    <!-- SNS共有：プレイ動画の後 -->
+    <div class="share-panel">
+      <p class="share-title"
+        data-ja="友達に #ぐねお を広めよう！"
+        data-en="Share #GUNEO with friends!">
+        友達に #ぐねお を広めよう！
+      </p>
+
+      <div class="share-grid">
+        <a class="share-btn share-line"
+           href="#"
+           onclick="shareLine(event)">
+          LINE
+        </a>
+
+        <a class="share-btn share-x"
+           href="#"
+           onclick="shareX(event)">
+          X (Twitter)
+        </a>
+
+        <button class="share-btn share-native"
+          type="button"
+          onclick="shareNative(this)"
+          data-ja="その他に共有"
+          data-en="More options">
+          その他に共有
+        </button>
+
+        <button class="share-btn share-copy"
+          type="button"
+          onclick="copyShareUrl(this)"
+          data-ja="URLをコピー"
+          data-en="Copy URL">
+          URLをコピー
+        </button>
+      </div>
+
+      <p class="share-status" aria-live="polite"></p>
+    </div>
 
   </section>
 
@@ -1001,51 +1040,6 @@ body.game-modal-open { overflow: hidden; }
     </p>
 
     <span class="button">COMING SOON</span>
-  </section>
-
-  <!-- SNS共有：下部 -->
-  <section id="share">
-    <h2>SHARE #GUNEO</h2>
-
-    <div class="share-panel">
-      <p class="share-title"
-        data-ja="友達に #ぐねお を広めよう！"
-        data-en="Share #GUNEO with friends!">
-        友達に #ぐねお を広めよう！
-      </p>
-
-      <div class="share-grid">
-        <a class="share-btn share-line"
-           href="#"
-           onclick="shareLine(event)">
-          LINE
-        </a>
-
-        <a class="share-btn share-x"
-           href="#"
-           onclick="shareX(event)">
-          X (Twitter)
-        </a>
-
-        <button class="share-btn share-native"
-          type="button"
-          onclick="shareNative(this)"
-          data-ja="その他に共有"
-          data-en="More options">
-          その他に共有
-        </button>
-
-        <button class="share-btn share-copy"
-          type="button"
-          onclick="copyShareUrl(this)"
-          data-ja="URLをコピー"
-          data-en="Copy URL">
-          URLをコピー
-        </button>
-      </div>
-
-      <p class="share-status" aria-live="polite"></p>
-    </div>
   </section>
 
 </main>
