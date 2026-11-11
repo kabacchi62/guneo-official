@@ -1,0 +1,24 @@
+
+[
+  {
+    "date": "2026.11.11",
+    "title_ja": "Androidアプリ版『#ぐねお』開発進行中！",
+    "title_en": "Android App Development Update!",
+    "description_ja": "ランキングモード、キャラクタースキン、ガチャ機能などを搭載したAndroid版を開発中です。正式リリースに向けて準備を進めています。",
+    "description_en": "The Android version is in development, with monthly rankings, character skins, gacha features, and more planned."
+  },
+  {
+    "date": "2026.11.09",
+    "title_ja": "WEB体験版が日本語・英語に対応！",
+    "title_en": "Web Demo Now Supports Japanese and English!",
+    "description_ja": "無料WEB体験版が日本語・英語に対応しました。キャラクターの色変更やスコア共有も楽しめます。",
+    "description_en": "The free web demo supports Japanese and English, with character color customization and score sharing."
+  },
+  {
+    "date": "2026.11.04",
+    "title_ja": "『#ぐねお』公式サイト公開！",
+    "title_en": "Official #GUNEO Website Launched!",
+    "description_ja": "『#ぐねお』の公式サイトを公開しました。無料WEB体験版も公開中です。",
+    "description_en": "The official #GUNEO website is live! You can also play the free web demo right now."
+  }
+]
