@@ -822,18 +822,11 @@ body.game-modal-open { overflow: hidden; }
 <!-- お知らせ -->
 <section id="news">
 <h2>NEWS</h2>
-<div class="news-list">
-<article class="news-item">
-<div class="news-date">2026.11.04</div>
-<h3 class="news-title" data-en="Official Website Launched!" data-ja="公式サイトを公開しました！">Official Website Launched!</h3>
-<p class="news-description" data-en="Welcome to the official #GUNEO website! Stay tuned for development news and updates." data-ja="#ぐねおの公式サイトを公開しました。ゲームの開発情報や最新のお知らせをこちらでお届けします。">Welcome to the official #GUNEO website! Stay tuned for development news and updates.</p>
-</article>
-<article class="news-item">
-<div class="news-date">2026.11.04</div>
-<h3 class="news-title" data-en="Android Version in Development!" data-ja="Android版を開発中！">Android Version in Development!</h3>
-<p class="news-description" data-en="We're developing the Android version. The release date will be announced here when confirmed." data-ja="現在、Android版のリリースに向けて開発を進めています。配信日が決まり次第、公式サイトでお知らせします。">We're developing the Android version. The release date will be announced here when confirmed.</p>
-</article>
+
+<div class="news-list" id="newsList">
+  <p class="news-description">Loading news...</p>
 </div>
+
 </section>
 <!-- ダウンロード -->
 <section class="app-only" id="download">
@@ -1055,6 +1048,53 @@ document.addEventListener('keydown', event => {
     event.preventDefault(); closeGameButton.focus();
   }
 });
+  
+/* NEWS自動読み込み（英語版） */
+async function loadNews() {
+  const newsList = document.getElementById("newsList");
+  if (!newsList) return;
+
+  try {
+    const response = await fetch("/news.json");
+    if (!response.ok) throw new Error("NEWS load failed");
+
+    const news = await response.json();
+
+    const latestNews = news
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, 3);
+
+    newsList.replaceChildren();
+
+    latestNews.forEach(item => {
+      const article = document.createElement("article");
+      article.className = "news-item";
+
+      const date = document.createElement("div");
+      date.className = "news-date";
+      date.textContent = item.date;
+
+      const title = document.createElement("h3");
+      title.className = "news-title";
+      title.textContent = item.title_en;
+
+      const description = document.createElement("p");
+      description.className = "news-description";
+      description.textContent = item.description_en;
+
+      article.append(date, title, description);
+      newsList.appendChild(article);
+    });
+
+  } catch (error) {
+    console.error("NEWS loading error:", error);
+    newsList.textContent = "Unable to load news.";
+  }
+}
+
+loadNews();
+
 </script>
 </body>
 </html>
